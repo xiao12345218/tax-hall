@@ -1,0 +1,3666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#c81e2b">
+<title>国家税务总局 - 网上办税服务厅</title>
+<style>
+/* ================= 基础 ================= */
+:root {
+  --red: #c81e2b;
+  --red-dark: #a3171f;
+  --red-light: #fdecec;
+  --gold: #f7d774;
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1f2329;
+  --text-2: #646a73;
+  --text-3: #8f959e;
+  --line: #ebeef2;
+  --blue: #2b7de9;
+  --green: #17a56b;
+  --orange: #f59a23;
+  --purple: #7b5cf0;
+  --cyan: #12a4b8;
+  --teal: #0f9d8f;
+  --radius: 14px;
+  --shadow: 0 2px 10px rgba(24, 34, 55, .06);
+  --header-h: 56px;
+  --tabbar-h: 58px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: #e9ebef;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+/* 手机外框效果 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #dfe4ec 0%, #e9ebef 60%);
+  z-index: -1;
+}
+
+body > * { position: relative; }
+
+/* ================= 头部 ================= */
+.app-header {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 460px;
+  height: var(--header-h);
+  background: linear-gradient(135deg, #c81e2b 0%, #a3171f 100%);
+  z-index: 55;
+  box-shadow: 0 2px 8px rgba(163, 23, 31, .22);
+}
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand-emblem { display: flex; align-items: center; }
+.brand-title { color: #fff; font-size: 15.5px; font-weight: 700; letter-spacing: .5px; }
+.brand-sub { color: rgba(255,255,255,.82); font-size: 10.5px; letter-spacing: 1.6px; margin-top: -2px; }
+.header-actions { display: flex; align-items: center; gap: 6px; }
+.header-link {
+  color: rgba(255,255,255,.92);
+  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.35);
+  cursor: pointer;
+  transition: .2s;
+}
+.header-link:active { background: rgba(255,255,255,.2); }
+
+/* ================= 主内容 ================= */
+#appMain {
+  position: fixed;
+  top: var(--header-h);
+  bottom: var(--tabbar-h);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 460px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+#appMain::-webkit-scrollbar { display: none; }
+
+.page { display: none; padding-bottom: 16px; }
+.page.active { display: block; animation: fadeUp .28s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= 首页 Hero ================= */
+.hero {
+  position: relative;
+  margin: 12px 12px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(130deg, #b81724 0%, #d9252f 55%, #e8543c 100%);
+  min-height: 148px;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(200, 30, 43, .26);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 88% 20%, rgba(247,215,116,.28) 0 42px, transparent 43px),
+    radial-gradient(circle at 96% 78%, rgba(255,255,255,.10) 0 66px, transparent 67px),
+    repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0 1px, transparent 1px 16px);
+}
+.hero-content { position: relative; padding: 18px 18px 16px; }
+.hero-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: rgba(247,215,116,.22);
+  border: 1px solid rgba(247,215,116,.55);
+  color: var(--gold);
+  letter-spacing: .6px;
+}
+.hero-title { font-size: 19px; font-weight: 800; margin-top: 10px; letter-spacing: .8px; }
+.hero-desc { font-size: 12px; color: rgba(255,255,255,.85); margin-top: 5px; letter-spacing: .5px; }
+.hero-btn {
+  display: inline-block;
+  margin-top: 14px;
+  background: #fff;
+  color: var(--red);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,.14);
+}
+.hero-btn:active { transform: scale(.97); }
+
+/* ================= 快捷入口 ================= */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  background: var(--card);
+  margin: 12px 12px 0;
+  border-radius: var(--radius);
+  padding: 14px 6px 12px;
+  box-shadow: var(--shadow);
+}
+.quick-item {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  cursor: pointer; padding: 4px 0; border-radius: 10px; transition: .18s;
+}
+.quick-item:active { background: #f6f7f9; transform: scale(.95); }
+.quick-item span { font-size: 11.5px; color: var(--text-2); }
+.quick-icon {
+  width: 42px; height: 42px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 16px; font-weight: 700;
+  box-shadow: 0 3px 8px rgba(0,0,0,.09);
+}
+.qi-blue { background: linear-gradient(140deg, #4b95f5, #2b7de9); }
+.qi-orange { background: linear-gradient(140deg, #ffb15c, #f59a23); }
+.qi-red { background: linear-gradient(140deg, #f0555f, #d92332); }
+.qi-green { background: linear-gradient(140deg, #37c78c, #17a56b); }
+.qi-purple { background: linear-gradient(140deg, #9b83f6, #7b5cf0); }
+.qi-cyan { background: linear-gradient(140deg, #3ec6d8, #12a4b8); }
+.qi-teal { background: linear-gradient(140deg, #2fb9a9, #0f9d8f); }
+.qi-gray { background: linear-gradient(140deg, #9aa3b0, #6f7887); }
+
+/* ================= 通用卡片 ================= */
+.card {
+  background: var(--card);
+  margin: 12px 12px 0;
+  border-radius: var(--radius);
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow);
+}
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.card-title { font-size: 14.5px; font-weight: 700; display: flex; align-items: center; gap: 7px; }
+.card-title .bar {
+  width: 3.5px; height: 15px; border-radius: 3px;
+  background: linear-gradient(180deg, #e0424e, var(--red));
+  display: inline-block;
+}
+.card-title .more { font-size: 12px; color: var(--text-3); cursor: pointer; }
+.more { font-size: 12px; color: var(--text-3); cursor: pointer; }
+.more:active { color: var(--red); }
+
+/* ================= 跑马灯 ================= */
+.notice-card { padding-bottom: 14px; }
+.marquee-wrap { display: flex; align-items: center; gap: 8px; }
+.marquee-tag {
+  flex: 0 0 auto; font-size: 10px; color: #fff; background: var(--red);
+  padding: 1.5px 6px; border-radius: 4px; letter-spacing: .5px;
+}
+.marquee-viewport {
+  flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.marquee-track {
+  display: inline-flex; gap: 0; white-space: nowrap;
+  animation: marquee 26s linear infinite;
+}
+.marquee-track span {
+  font-size: 12.5px; color: var(--text-2); padding-right: 42px;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ================= 统计行 ================= */
+.stat-row { display: flex; }
+.stat-item { flex: 1; text-align: center; position: relative; }
+.stat-item + .stat-item::before {
+  content: ""; position: absolute; left: 0; top: 20%; height: 60%;
+  width: 1px; background: var(--line);
+}
+.stat-num { font-size: 21px; font-weight: 800; letter-spacing: .5px; }
+.stat-label { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.c-red { color: var(--red); }
+.c-orange { color: var(--orange); }
+.c-green { color: var(--green); }
+.c-blue { color: var(--blue); }
+
+/* ================= 列表 ================= */
+.list { display: flex; flex-direction: column; }
+.list-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 2px; cursor: pointer; transition: .18s;
+}
+.list-item + .list-item { border-top: 1px solid var(--line); }
+.list-item:active { background: #f7f8fa; }
+.li-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 14px; font-weight: 700;
+}
+.li-red { background: linear-gradient(140deg, #f0555f, #d92332); }
+.li-blue { background: linear-gradient(140deg, #4b95f5, #2b7de9); }
+.li-green { background: linear-gradient(140deg, #37c78c, #17a56b); }
+.li-orange { background: linear-gradient(140deg, #ffb15c, #f59a23); }
+.li-body { flex: 1; min-width: 0; }
+.li-title { font-size: 14px; font-weight: 600; }
+.li-sub { font-size: 11.5px; color: var(--text-3); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.li-arrow { color: #c3c8d0; font-size: 18px; }
+
+/* ================= 办税服务厅 ================= */
+.hall-row { display: flex; flex-direction: column; gap: 10px; }
+.hall-item {
+  background: #f8f9fb; border-radius: 11px; padding: 10px 12px;
+  border-left: 3px solid var(--red);
+}
+.hall-item-nav {
+  display: flex; align-items: center; gap: 10px;
+}
+.hall-info { flex: 1; min-width: 0; }
+.hall-nav-btn {
+  flex: 0 0 auto;
+  font-size: 12px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #d92b36, #b81724);
+  padding: 7px 15px; border-radius: 18px;
+  cursor: pointer; transition: .18s;
+  box-shadow: 0 3px 8px rgba(200,30,43,.25);
+  -webkit-user-select: none; user-select: none;
+}
+.hall-nav-btn:active { transform: scale(.94); opacity: .9; }
+.hall-name { font-size: 13.5px; font-weight: 600; }
+.hall-addr { font-size: 11.5px; color: var(--text-2); margin-top: 2px; line-height: 1.55; }
+.hall-tag { font-size: 11px; color: var(--green); margin-top: 4px; }
+
+/* ================= 服务厅导航界面 ================= */
+#navOverlay { align-items: center; }
+.nav-box {
+  width: 84%; max-width: 340px;
+  background: #fff; border-radius: 18px;
+  padding: 22px 20px 20px;
+  margin: auto; position: relative;
+  animation: popIn .26s cubic-bezier(.22,1.2,.36,1);
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+}
+.nav-box-title {
+  font-size: 16.5px; font-weight: 800; letter-spacing: .5px;
+  padding-right: 26px; line-height: 1.4;
+}
+.nav-rows { margin-top: 14px; }
+.nav-row {
+  display: flex; gap: 10px;
+  padding: 9px 0; border-bottom: 1px dashed var(--line);
+  font-size: 12.5px; line-height: 1.65;
+}
+.nav-row:last-child { border-bottom: none; }
+.nav-label {
+  flex: 0 0 auto; width: 60px; color: var(--text-3); font-weight: 600;
+}
+.nav-value { flex: 1; color: var(--text); word-break: break-all; }
+.nav-map-hint {
+  margin-top: 14px;
+  background: #f0f6ff; border: 1px solid #d6e6ff;
+  color: #1677ff; font-size: 12.5px; font-weight: 600;
+  text-align: center; padding: 10px 12px; border-radius: 11px;
+  line-height: 1.5;
+}
+.nav-use-btn {
+  margin-top: 14px;
+  background: #1677ff; color: #fff;
+  font-size: 15px; font-weight: 700; letter-spacing: 6px;
+  text-align: center; padding: 12px 0; border-radius: 24px;
+  cursor: pointer; transition: .18s;
+  box-shadow: 0 6px 14px rgba(22,119,255,.3);
+  -webkit-user-select: none; user-select: none;
+}
+.nav-use-btn:active { transform: scale(.98); opacity: .92; }
+
+/* ================= 图表 ================= */
+.chart-wrap { padding: 4px 0 0; }
+.bar-chart { width: 100%; height: auto; display: block; }
+
+/* ================= 子页面头 ================= */
+.sub-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px 10px;
+}
+.sub-title { font-size: 17px; font-weight: 800; letter-spacing: .5px; }
+.sub-action { font-size: 12.5px; color: var(--red); cursor: pointer; }
+
+/* ================= 消息 ================= */
+.msg-tabs, .info-tabs {
+  display: flex; gap: 8px; padding: 0 14px 10px; overflow-x: auto; scrollbar-width: none;
+}
+.msg-tabs::-webkit-scrollbar, .info-tabs::-webkit-scrollbar { display: none; }
+.msg-tab, .info-tab {
+  flex: 0 0 auto; font-size: 12.5px; color: var(--text-2);
+  background: #fff; border-radius: 20px; padding: 5px 14px;
+  cursor: pointer; transition: .2s; box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.msg-tab.active, .info-tab.active {
+  background: linear-gradient(135deg, #d92b36, #b81724);
+  color: #fff; font-weight: 600;
+}
+.msg-list, .info-list { padding: 0 12px; display: flex; flex-direction: column; gap: 10px; }
+.msg-item, .info-item {
+  background: #fff; border-radius: var(--radius); padding: 13px 14px;
+  box-shadow: var(--shadow); cursor: pointer; transition: .18s; position: relative;
+}
+.msg-item:active, .info-item:active { transform: scale(.985); }
+.msg-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.msg-type {
+  font-size: 10.5px; padding: 1.5px 7px; border-radius: 5px; flex: 0 0 auto;
+}
+.mt-notice { background: #fdecec; color: var(--red); }
+.mt-tax { background: #fff4e5; color: #d98200; }
+.mt-sys { background: #eef4ff; color: var(--blue); }
+.msg-date { font-size: 11px; color: var(--text-3); }
+.msg-title { font-size: 14.5px; font-weight: 700; margin-top: 8px; }
+.msg-text { font-size: 12.5px; color: var(--text-2); margin-top: 5px; line-height: 1.6; }
+.msg-foot {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding-top: 9px; border-top: 1px dashed var(--line);
+  font-size: 11.5px; color: var(--text-3);
+}
+.dot-unread {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--red);
+  display: inline-block; flex: 0 0 auto;
+}
+.msg-item.read { opacity: .72; }
+.msg-item.read .dot-unread { background: #cfd4dc; }
+
+.info-item { display: flex; gap: 12px; }
+.info-date-box {
+  flex: 0 0 auto; width: 50px; text-align: center;
+  border-right: 1px solid var(--line); padding-right: 10px;
+}
+.info-day { font-size: 19px; font-weight: 800; color: var(--red); line-height: 1.1; }
+.info-ym { font-size: 10.5px; color: var(--text-3); }
+.info-body { flex: 1; min-width: 0; }
+.info-title { font-size: 14px; font-weight: 700; line-height: 1.45; }
+.info-summary {
+  font-size: 12px; color: var(--text-2); margin-top: 5px; line-height: 1.6;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.info-meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 11px; color: var(--text-3); }
+.info-tagx { background: #f3f4f6; padding: 1px 7px; border-radius: 4px; }
+
+/* ================= 我的 - 锁定 ================= */
+.locked-wrap {
+  margin: 40px 24px 0; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.locked-icon {
+  width: 96px; height: 96px; border-radius: 50%;
+  background: linear-gradient(140deg, #fdecec, #fbdcdc);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(200,30,43,.14);
+}
+.locked-title { font-size: 17px; font-weight: 800; margin-top: 18px; }
+.locked-desc { font-size: 12.5px; color: var(--text-2); margin-top: 8px; line-height: 1.7; max-width: 300px; }
+.locked-btn {
+  margin-top: 22px; width: 100%; max-width: 280px;
+  background: linear-gradient(135deg, #d92b36, #b81724);
+  color: #fff; font-size: 15px; font-weight: 700;
+  padding: 12px 0; border-radius: 26px; cursor: pointer;
+  box-shadow: 0 6px 16px rgba(200,30,43,.3); letter-spacing: 1.5px;
+}
+.locked-btn:active { transform: scale(.98); }
+.locked-tip { font-size: 11px; color: var(--text-3); margin-top: 14px; line-height: 1.7; }
+
+/* ================= 我的 - 已解锁 ================= */
+.mine-wrap { padding-top: 0; }
+.mine-header {
+  background: linear-gradient(135deg, #c81e2b 0%, #a3171f 100%);
+  padding: 18px 16px 22px;
+  display: flex; align-items: center; gap: 13px;
+  position: relative;
+  border-radius: 0 0 18px 18px;
+}
+.mine-header::after {
+  content: ""; position: absolute; right: -20px; top: -20px;
+  width: 130px; height: 130px; border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.mine-avatar {
+  width: 60px; height: 60px; border-radius: 50%; flex: 0 0 auto;
+  background: linear-gradient(140deg, #fff5f5, #ffd9b0);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--red); font-size: 24px; font-weight: 800;
+  border: 2px solid rgba(255,255,255,.85);
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+  position: relative; z-index: 1;
+}
+.mine-avatar.temp { background: linear-gradient(140deg, #fff5f5, #ffd9b0); color: #d98200; }
+.mine-avatar.real { background: linear-gradient(140deg, #e8f7ef, #b7e8cf); color: #17a56b; }
+.mine-avatar.wx { background: linear-gradient(140deg, #e7f7ec, #b6e9c4); color: #07c160; }
+.mine-userinfo { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.mine-username {
+  color: #fff; font-size: 18px; font-weight: 800;
+  letter-spacing: .6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.mine-userbadge {
+  display: inline-block; font-size: 10.5px; color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3);
+  padding: 1.5px 9px; border-radius: 20px; margin-top: 6px;
+}
+.mine-logout {
+  position: relative; z-index: 1;
+  font-size: 11.5px; color: rgba(255,255,255,.9);
+  border: 1px solid rgba(255,255,255,.4);
+  padding: 4px 11px; border-radius: 20px; cursor: pointer; flex: 0 0 auto;
+}
+.mine-logout:active { background: rgba(255,255,255,.2); }
+
+.balance-card {
+  margin: -12px 12px 0;
+  background: linear-gradient(120deg, #2b3038 0%, #1b1f25 100%);
+  border-radius: var(--radius);
+  padding: 16px 16px 15px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 8px 20px rgba(20,24,30,.28);
+  position: relative; z-index: 2; overflow: hidden;
+}
+.balance-card::after {
+  content: ""; position: absolute; right: -30px; bottom: -50px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(247,215,116,.22), transparent 70%);
+}
+.balance-label { font-size: 11.5px; color: rgba(255,255,255,.62); letter-spacing: 1px; }
+.balance-value {
+  font-size: 27px; font-weight: 800; margin-top: 3px; letter-spacing: .5px;
+  background: linear-gradient(100deg, #f7d774, #fff1c4);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.balance-value.flash { animation: flashUp .6s ease; }
+@keyframes flashUp {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+.balance-btns { display: flex; gap: 8px; position: relative; z-index: 1; }
+.btn-mini {
+  font-size: 12px; padding: 6px 14px; border-radius: 20px; cursor: pointer;
+  transition: .18s;
+}
+.btn-recharge {
+  background: linear-gradient(135deg, #f7d774, #e8b93f);
+  color: #5a3d00; font-weight: 700;
+  box-shadow: 0 3px 10px rgba(232,185,63,.35);
+}
+.btn-recharge:active { transform: scale(.96); }
+.btn-detail {
+  background: rgba(255,255,255,.13); color: #fff;
+  border: 1px solid rgba(255,255,255,.28);
+}
+.btn-detail:active { background: rgba(255,255,255,.24); }
+
+.mine-card { margin-top: 12px; }
+.func-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.func-item {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 10px 2px; border-radius: 11px; cursor: pointer; transition: .18s;
+}
+.func-item:active { background: #f6f7f9; transform: scale(.95); }
+.func-item span { font-size: 11.5px; color: var(--text-2); }
+.func-icon {
+  width: 44px; height: 44px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 16px; font-weight: 700;
+  box-shadow: 0 3px 9px rgba(0,0,0,.1);
+}
+.fi-red { background: linear-gradient(140deg, #f0555f, #d92332); }
+.fi-blue { background: linear-gradient(140deg, #4b95f5, #2b7de9); }
+.fi-green { background: linear-gradient(140deg, #37c78c, #17a56b); }
+.fi-orange { background: linear-gradient(140deg, #ffb15c, #f59a23); }
+.fi-purple { background: linear-gradient(140deg, #9b83f6, #7b5cf0); }
+.fi-cyan { background: linear-gradient(140deg, #3ec6d8, #12a4b8); }
+
+/* ================= 底部导航 ================= */
+.tabbar {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 460px;
+  height: var(--tabbar-h);
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  z-index: 58;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  cursor: pointer; color: var(--text-3); transition: .2s; position: relative;
+}
+.tab-icon { width: 23px; height: 23px; position: relative; }
+.tab-icon svg { width: 100%; height: 100%; fill: currentColor; }
+.tab-item span { font-size: 10.5px; }
+.tab-item.active { color: var(--red); }
+.tab-item.active .tab-icon { transform: translateY(-1px); }
+.tab-badge {
+  position: absolute; top: -6px; right: -10px;
+  background: var(--red); color: #fff;
+  font-size: 9px; font-style: normal; font-weight: 700;
+  min-width: 15px; height: 15px; line-height: 15px; text-align: center;
+  border-radius: 8px; padding: 0 4px;
+  box-shadow: 0 2px 6px rgba(200,30,43,.4);
+}
+.tab-badge.hidden { display: none; }
+.tab-lock {
+  position: absolute; bottom: -4px; right: -8px;
+  font-size: 10px; font-style: normal;
+  filter: grayscale(.2);
+}
+
+/* ================= 遮罩 / 弹层 ================= */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 20, 30, .5);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  animation: ovIn .2s ease;
+}
+.overlay.show { display: flex; }
+@keyframes ovIn { from { opacity: 0; } to { opacity: 1; } }
+
+.sheet {
+  width: 100%; max-width: 460px;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 22px 20px calc(24px + env(safe-area-inset-bottom));
+  position: relative;
+  animation: sheetUp .3s cubic-bezier(.22,.9,.3,1);
+  max-height: 92vh; overflow-y: auto;
+  scrollbar-width: none;
+}
+.sheet::-webkit-scrollbar { display: none; }
+@keyframes sheetUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.sheet-close {
+  position: absolute; top: 14px; right: 16px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #f2f3f5; color: var(--text-3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; transition: .18s;
+}
+.sheet-close:active { background: #e6e8eb; }
+
+.sheet-title-row { display: flex; align-items: center; gap: 8px; }
+.sheet-bar {
+  width: 4px; height: 17px; border-radius: 3px;
+  background: linear-gradient(180deg, #e0424e, var(--red));
+}
+.sheet-title { font-size: 17px; font-weight: 800; letter-spacing: .5px; }
+.sheet-sub { font-size: 12.5px; color: var(--text-3); margin: 8px 0 16px; line-height: 1.65; }
+.sheet-sub b { color: var(--red); font-size: 14px; }
+
+.sheet-btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #d92b36, #b81724);
+  color: #fff; font-size: 15.5px; font-weight: 700;
+  text-align: center; padding: 13px 0; border-radius: 26px;
+  cursor: pointer; letter-spacing: 2px;
+  box-shadow: 0 6px 16px rgba(200,30,43,.28);
+  transition: .18s;
+}
+.sheet-btn:active { transform: scale(.985); opacity: .92; }
+.sheet-btn.btn-danger {
+  background: #fff; color: var(--red);
+  border: 1px solid #f3c9cd; box-shadow: none;
+  font-size: 14px; letter-spacing: 1px;
+}
+.sheet-tip { font-size: 11px; color: var(--text-3); margin-top: 12px; line-height: 1.7; }
+
+/* 字段 */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block; font-size: 12.5px; color: var(--text-2);
+  font-weight: 600; margin-bottom: 7px;
+}
+.field input {
+  width: 100%; height: 46px; border: 1px solid #e3e6ea;
+  border-radius: 12px; padding: 0 14px; font-size: 14.5px;
+  outline: none; transition: .2s; background: #fafbfc;
+  font-family: inherit; color: var(--text);
+}
+.field input:focus {
+  border-color: var(--red); background: #fff;
+  box-shadow: 0 0 0 3px rgba(200,30,43,.09);
+}
+.field input::placeholder { color: #b9bec7; }
+.field-row { margin: 4px 0 2px; }
+.checkbox {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11.5px; color: var(--text-2); cursor: pointer;
+}
+.checkbox input { width: 15px; height: 15px; accent-color: var(--red); }
+
+.code-row { display: flex; gap: 10px; }
+.code-row input { flex: 1; }
+.code-btn {
+  flex: 0 0 auto; width: 116px; height: 46px; border-radius: 12px;
+  background: #fff; border: 1px solid var(--red); color: var(--red);
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: .18s;
+}
+.code-btn:active { background: #fdecec; }
+.code-btn.disabled {
+  border-color: #dcdfe4; color: #b0b5bd; cursor: not-allowed; background: #f6f7f9;
+}
+.code-hint { font-size: 11px; color: var(--green); margin-top: 7px; min-height: 15px; }
+.code-hint.err { color: var(--red); }
+
+/* ================= 登录弹层 ================= */
+.login-sheet { text-align: center; padding-top: 30px; }
+.login-logo { display: flex; justify-content: center; }
+.login-title { font-size: 16px; font-weight: 800; margin-top: 12px; letter-spacing: .5px; }
+.login-sub { font-size: 12.5px; color: var(--text-3); margin-top: 6px; }
+.login-ways { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; text-align: left; }
+.way-card {
+  border: 1px solid #e8ebef; border-radius: 14px; padding: 14px 15px;
+  cursor: pointer; transition: .2s; background: #fcfdfe; position: relative; overflow: hidden;
+}
+.way-card::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--red); opacity: 0; transition: .2s;
+}
+.way-card:active { border-color: var(--red); background: #fffafb; transform: scale(.99); }
+.way-card:active::before { opacity: 1; }
+.way-head { display: flex; align-items: center; gap: 8px; }
+.way-name { font-size: 15px; font-weight: 700; }
+.way-badge {
+  font-size: 10px; padding: 1.5px 8px; border-radius: 20px; font-weight: 600;
+}
+.badge-temp { background: #fff4e5; color: #d98200; }
+.badge-real { background: #e8f7ef; color: #17a56b; }
+.way-desc { font-size: 11.5px; color: var(--text-3); margin-top: 6px; line-height: 1.6; }
+.login-footer { font-size: 11px; color: var(--text-3); margin-top: 22px; }
+
+/* ================= 微信登录 ================= */
+.divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 20px 0 14px; color: var(--text-3); font-size: 11.5px;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
+.wx-login {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: #07c160; color: #fff;
+  font-size: 15px; font-weight: 700;
+  padding: 12px 0; border-radius: 26px; cursor: pointer;
+  box-shadow: 0 6px 16px rgba(7,193,96,.28); letter-spacing: .5px;
+  transition: .18s;
+}
+.wx-login:active { transform: scale(.985); opacity: .92; }
+.wx-badge {
+  font-size: 10px; background: rgba(255,255,255,.22);
+  padding: 1px 7px; border-radius: 20px; font-weight: 600;
+}
+
+/* ================= 充值 ================= */
+.recharge-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 18px;
+}
+.r-item {
+  border: 1px solid #e8ebef; border-radius: 12px;
+  padding: 15px 0; text-align: center;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: .18s; background: #fcfdfe; color: var(--text);
+}
+.r-item:active { transform: scale(.97); }
+.r-item.active {
+  border-color: var(--red); background: #fff6f7; color: var(--red);
+  box-shadow: 0 0 0 3px rgba(200,30,43,.08);
+}
+
+/* ================= 账单 ================= */
+.bill-list { margin-top: 14px; max-height: 52vh; overflow-y: auto; scrollbar-width: none; }
+.bill-list::-webkit-scrollbar { display: none; }
+.bill-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 2px; border-bottom: 1px solid var(--line);
+}
+.bill-item:last-child { border-bottom: none; }
+.bill-left { display: flex; flex-direction: column; gap: 3px; }
+.bill-title { font-size: 14px; font-weight: 600; }
+.bill-time { font-size: 11px; color: var(--text-3); }
+.bill-amount { font-size: 16px; font-weight: 800; }
+.bill-amount.in { color: var(--red); }
+.bill-amount.out { color: var(--green); }
+.bill-empty { text-align: center; color: var(--text-3); font-size: 12.5px; padding: 36px 0; }
+
+/* ================= 弹层列表 ================= */
+.way-list { display: flex; flex-direction: column; margin-top: 6px; }
+.way-line {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 13px 2px; border-bottom: 1px solid var(--line);
+}
+.way-line:last-child { border-bottom: none; }
+.way-line.clickable { cursor: pointer; transition: .18s; border-radius: 8px; }
+.way-line.clickable:active { background: #f7f8fa; }
+.way-line-left { min-width: 0; }
+.wl-name { font-size: 14px; font-weight: 600; }
+.wl-sub { font-size: 11.5px; color: var(--text-3); margin-top: 3px; }
+.wl-tag { font-size: 11px; color: var(--text-3); flex: 0 0 auto; }
+.wl-tag.tag-on { color: var(--green); }
+
+.account-head {
+  display: flex; align-items: center; gap: 13px;
+  background: #f8f9fb; border-radius: 14px;
+  padding: 14px 15px; margin-bottom: 12px;
+}
+.account-avatar {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: linear-gradient(140deg, #fdecec, #fbd3d3);
+  color: var(--red); font-size: 20px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+.account-name { font-size: 15px; font-weight: 700; }
+.account-id { font-size: 11.5px; color: var(--text-3); margin-top: 3px; }
+
+.link-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.link-item {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 14px 4px; border-radius: 12px;
+  text-decoration: none; color: var(--text-2);
+  background: #fafbfc; border: 1px solid #f0f2f5;
+  transition: .18s;
+}
+.link-item:active { background: #f2f4f7; transform: scale(.96); }
+.link-item span { font-size: 11.5px; text-align: center; line-height: 1.35; }
+
+/* ================= 微信授权登录弹窗 ================= */
+#wxAuthOverlay { align-items: center; }
+.wx-dialog {
+  width: 84%; max-width: 330px;
+  background: #fff; border-radius: 18px;
+  padding: 22px 20px 18px;
+  margin: auto;
+  animation: popIn .26s cubic-bezier(.22,1.2,.36,1);
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+}
+.wx-dialog-head {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-bottom: 4px;
+}
+.wx-dialog-brand { font-size: 15px; font-weight: 700; color: #07c160; letter-spacing: .5px; }
+.wx-dialog-title {
+  text-align: center; font-size: 18px; font-weight: 800;
+  margin-top: 10px; letter-spacing: .5px;
+}
+.wx-dialog-text {
+  font-size: 12.5px; color: var(--text-2); line-height: 1.75;
+  margin-top: 10px; text-align: justify;
+}
+.wx-dialog-text b { color: #07c160; }
+.wx-dialog-field { margin-top: 16px; }
+.wx-dialog-field label {
+  display: block; font-size: 12px; color: var(--text-3);
+  font-weight: 600; margin-bottom: 6px;
+}
+.wx-dialog-field input {
+  width: 100%; height: 44px; border: 1px solid #e3e6ea;
+  border-radius: 11px; padding: 0 13px; font-size: 14.5px;
+  outline: none; background: #fafbfc; transition: .2s;
+  font-family: inherit; color: var(--text);
+}
+.wx-dialog-field input:focus {
+  border-color: #07c160; background: #fff;
+  box-shadow: 0 0 0 3px rgba(7,193,96,.1);
+}
+.wx-dialog-btns { display: flex; gap: 10px; margin-top: 20px; }
+.wx-btn-cancel, .wx-btn-confirm {
+  flex: 1; text-align: center; padding: 11px 0;
+  border-radius: 22px; font-size: 14.5px; font-weight: 700; cursor: pointer;
+  transition: .18s;
+}
+.wx-btn-cancel {
+  background: #f4f5f7; color: var(--text-2);
+}
+.wx-btn-cancel:active { background: #e8eaee; }
+.wx-btn-confirm {
+  background: #07c160; color: #fff;
+  box-shadow: 0 5px 14px rgba(7,193,96,.3);
+}
+.wx-btn-confirm:active { transform: scale(.98); opacity: .92; }
+
+/* ================= 微信钱包验证 ================= */
+.wx-wallet-steps {
+  background: #f6fdf9; border: 1px solid #d8f2e4;
+  border-radius: 13px; padding: 13px 14px; margin-bottom: 14px;
+}
+.wx-steps-title {
+  font-size: 12.5px; font-weight: 700; color: #07a352;
+  margin-bottom: 9px; letter-spacing: .5px;
+}
+.wx-step {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 4px 0; font-size: 12.5px; color: var(--text-2); line-height: 1.55;
+}
+.wx-step-num {
+  flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%;
+  background: #07c160; color: #fff; font-size: 10.5px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1.5px;
+}
+.wx-step-text b { color: #07a352; }
+
+.pay-hint {
+  font-size: 11px; color: var(--text-3);
+  line-height: 1.65; margin-top: 7px;
+  background: #f7f8fa; border-radius: 9px;
+  padding: 8px 11px;
+}
+
+/* ================= 办税业务详情页 ================= */
+.biz-top {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px 4px;
+}
+.biz-back {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 13px; color: var(--text-2);
+  padding: 5px 12px 5px 8px; border-radius: 20px;
+  background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  cursor: pointer; transition: .18s; flex: 0 0 auto;
+}
+.biz-back:active { background: #f2f4f7; transform: scale(.96); }
+.biz-top-title {
+  flex: 1; text-align: center;
+  font-size: 16.5px; font-weight: 800; letter-spacing: .5px;
+  margin-right: 64px;
+}
+.biz-top-right {
+  display: none;
+}
+
+.biz-hero {
+  margin: 10px 12px 0;
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; align-items: center; gap: 13px;
+  background: linear-gradient(130deg, #b81724 0%, #d9252f 70%, #e8543c 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(200, 30, 43, .24);
+  position: relative; overflow: hidden;
+}
+.biz-hero::after {
+  content: ""; position: absolute; right: -24px; top: -24px;
+  width: 110px; height: 110px; border-radius: 50%;
+  background: rgba(255,255,255,.08);
+}
+.biz-hero-icon {
+  flex: 0 0 auto;
+  width: 52px; height: 52px; border-radius: 15px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: #fff;
+  position: relative; z-index: 1;
+}
+.biz-hero-info { min-width: 0; position: relative; z-index: 1; flex: 1; }
+.biz-hero-name { font-size: 18px; font-weight: 800; letter-spacing: .5px; }
+.biz-hero-desc {
+  font-size: 12px; color: rgba(255,255,255,.88);
+  margin-top: 4px; line-height: 1.55;
+}
+.biz-hero-nav {
+  flex: 0 0 auto; position: relative; z-index: 1;
+  font-size: 12px; font-weight: 700; color: #fff;
+  background: rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.55);
+  padding: 7px 14px; border-radius: 18px;
+  cursor: pointer; transition: .18s;
+  -webkit-user-select: none; user-select: none;
+}
+.biz-hero-nav:active { background: rgba(255,255,255,.35); transform: scale(.95); }
+.biz-tips {
+  font-size: 12.5px; color: var(--text-2); line-height: 1.8;
+}
+.badge {
+  flex: 0 0 auto; font-size: 10.5px; font-weight: 700;
+  padding: 2px 9px; border-radius: 20px;
+}
+.b-done { background: #e8f7ef; color: #17a56b; }
+.b-doing { background: #fff4e5; color: #d98200; }
+.b-wait { background: #eef4ff; color: var(--blue); }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 12.5px; color: var(--text-2);
+  background: #f6f7f9; border: 1px solid #e8ebef;
+  border-radius: 20px; padding: 7px 15px;
+  cursor: pointer; transition: .18s; user-select: none;
+  -webkit-user-select: none;
+}
+.chip:active { transform: scale(.96); }
+.chip.active {
+  background: #fff6f7; border-color: var(--red);
+  color: var(--red); font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(200,30,43,.07);
+}
+
+/* ================= 通用提示框 ================= */
+.alert-box {
+  background: #fff; border-radius: 16px;
+  width: 78%; max-width: 320px;
+  padding: 22px 20px 16px;
+  text-align: center;
+  animation: popIn .26s cubic-bezier(.22,1.2,.36,1);
+  margin: auto;
+}
+@keyframes popIn {
+  from { transform: scale(.88); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+#alertOverlay { align-items: center; }
+.alert-title { font-size: 16px; font-weight: 800; }
+.alert-body { font-size: 13px; color: var(--text-2); margin-top: 10px; line-height: 1.7; }
+.alert-body b { color: var(--red); font-size: 16px; letter-spacing: 2px; }
+.alert-btn {
+  margin-top: 20px; background: linear-gradient(135deg, #d92b36, #b81724);
+  color: #fff; font-size: 14.5px; font-weight: 700;
+  padding: 10px 0; border-radius: 22px; cursor: pointer;
+}
+.alert-btn:active { opacity: .9; }
+
+/* ================= 短信浮层 ================= */
+.sms-toast {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translate(-50%, -140%);
+  width: calc(100% - 28px); max-width: 420px;
+  background: rgba(28, 32, 40, .96);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 12px 15px;
+  z-index: 300;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  transition: transform .45s cubic-bezier(.22,1.1,.36,1), opacity .3s;
+  opacity: 0;
+  pointer-events: none;
+}
+.sms-toast.show { transform: translate(-50%, 0); opacity: 1; }
+.sms-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 5px;
+}
+.sms-from { font-size: 11.5px; color: rgba(255,255,255,.62); letter-spacing: .6px; }
+.sms-time { font-size: 11px; color: rgba(255,255,255,.42); }
+.sms-body { font-size: 13px; color: #fff; line-height: 1.6; }
+.sms-body b {
+  color: #7ee2a8; font-size: 17px; letter-spacing: 3px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ================= 全局 toast ================= */
+.toast {
+  position: fixed;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) scale(.9);
+  background: rgba(28,32,40,.92);
+  color: #fff; font-size: 13.5px;
+  padding: 11px 20px; border-radius: 12px;
+  z-index: 400; opacity: 0; pointer-events: none;
+  transition: .25s; max-width: 76%; text-align: center; line-height: 1.5;
+}
+.toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.hidden { display: none !important; }
+
+/* ================= 底部说明 ================= */
+.footer-note {
+  text-align: center; font-size: 11px; color: #a8aeb8;
+  padding: 20px 20px 8px; line-height: 1.8;
+}
+.footer-note div + div { margin-top: 2px; }
+
+/* ================= 实名认证 / 我的业务记录 ================= */
+.cert-badge {
+  flex: 0 0 auto; font-size: 10.5px; font-weight: 600;
+  padding: 2.5px 9px; border-radius: 20px;
+}
+.cert-badge.no  { background: #fff4e5; color: #d98200; }
+.cert-badge.yes { background: #e8f7ef; color: #17a56b; }
+
+/* 实名认证表单：文字在输入框前面 */
+.cert-field {
+  display: flex; align-items: center;
+  padding: 13px 2px; border-bottom: 1px solid var(--line);
+}
+.cert-field + .cert-field { border-top: none; }
+.cert-label {
+  flex: 0 0 auto; width: 80px;
+  font-size: 14px; font-weight: 600; color: #1f2329;
+}
+.cert-field input {
+  flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+  font-size: 15px; color: #1f2329; padding: 4px 0; letter-spacing: .5px;
+}
+.cert-field input::placeholder { color: #b9bec7; letter-spacing: 0; font-size: 13.5px; }
+
+/* 实名认证示例 */
+.cert-demo {
+  background: #fafbfc; border: 1px dashed #d9dee6; border-radius: 12px;
+  padding: 12px 14px;
+}
+.cert-demo-row { display: flex; align-items: baseline; font-size: 13.5px; line-height: 2.1; }
+.cert-demo-label { color: #646a73; flex: 0 0 auto; }
+.cert-demo-label::after { content: "："; }
+.cert-demo-val { color: #1f2329; font-weight: 600; word-break: break-all; }
+.cert-demo-tip { margin-top: 7px; font-size: 11.5px; color: #d98200; }
+
+/* 已认证横幅 */
+.cert-done { display: flex; align-items: center; gap: 10px; }
+.cert-done-badge {
+  flex: 0 0 auto; background: #e8f7ef; color: #17a56b;
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+}
+.cert-done-txt { font-size: 13px; color: #1f2329; word-break: break-all; }
+
+/* 记录页 */
+.rec-count { font-size: 11.5px; color: #a8aeb8; }
+.rec-amount { flex: 0 0 auto; font-size: 13px; font-weight: 700; margin-left: 8px; color: #1f2329; }
+
+/* 记录详情弹窗 */
+.dv-title { font-size: 14.5px; font-weight: 700; color: #1f2329; line-height: 1.55; }
+.dv-badge-row { display: flex; align-items: center; gap: 8px; margin: 8px 0 6px; }
+.dv-row { display: flex; gap: 10px; font-size: 12.5px; line-height: 1.9; }
+.dv-k { flex: 0 0 auto; color: #8f959e; width: 78px; }
+.dv-k::after { content: "："; }
+.dv-v { color: #1f2329; word-break: break-all; }
+.dv-note { margin-top: 8px; font-size: 11px; color: #a8aeb8; line-height: 1.7; }
+
+/* 修改密码 */
+.pwd-account {
+  display: flex; align-items: center; gap: 8px;
+  background: #f8f9fb; border-radius: 10px;
+  padding: 10px 13px; margin-bottom: 14px;
+  font-size: 12.5px; color: #646a73;
+}
+.pwd-account b { color: #1f2329; font-weight: 600; word-break: break-all; }
+
+/* 账号注销 */
+.del-warn {
+  background: #fff8f0; border: 1px solid #ffe3c2; border-radius: 12px;
+  padding: 12px 14px; margin: 4px 0 14px;
+}
+.del-warn-title { font-size: 13px; font-weight: 700; color: #d98200; margin-bottom: 5px; }
+.del-warn-item { font-size: 12px; color: #8a6134; line-height: 1.9; }
+.del-warn-tip { margin-top: 6px; font-size: 11px; color: #c3571c; }
+.del-agree { margin-bottom: 4px; }
+
+</style>
+</head>
+<body>
+
+<!-- ================= 顶部导航条 ================= -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-emblem">
+        <svg viewBox="0 0 48 48" width="30" height="30">
+          <circle cx="24" cy="24" r="22" fill="#c81e2b"/>
+          <circle cx="24" cy="24" r="20" fill="none" stroke="#f7d774" stroke-width="1.4"/>
+          <path d="M24 8l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8-7.2-3.8-7.2 3.8 1.4-8-5.9-5.7 8.1-1.2z" fill="#f7d774"/>
+          <path d="M14 33.5h20v2.2H14z" fill="#f7d774"/>
+          <text x="24" y="38.6" font-size="5.4" fill="#f7d774" text-anchor="middle" font-family="SimSun,serif">税</text>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">国家税务总局</div>
+        <div class="brand-sub">网上办税服务厅</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span class="header-link" data-page="message">消息</span>
+      <span class="header-link" data-page="mine" id="headerMine">我的</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 主体内容 ================= -->
+<main id="appMain">
+
+  <!-- ---------- 首页模块 ---------- -->
+  <section class="page" id="page-home">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-tag">2026 年度办税日历</div>
+        <div class="hero-title">依法诚信纳税　共建和谐社会</div>
+        <div class="hero-desc">掌上办税 · 一次不用跑 · 全程网上办</div>
+        <div class="hero-btn" data-act="open-biz" data-biz="declare">立即办税 →</div>
+      </div>
+    </div>
+
+    <div class="quick-grid">
+      <div class="quick-item" data-act="open-biz" data-biz="declare">
+        <div class="quick-icon qi-blue">申</div><span>我要申报</span>
+      </div>
+      <div class="quick-item" data-act="open-biz" data-biz="invoice">
+        <div class="quick-icon qi-orange">票</div><span>发票业务</span>
+      </div>
+      <div class="quick-item" data-act="open-biz" data-biz="pay">
+        <div class="quick-icon qi-red">缴</div><span>税费缴纳</span>
+      </div>
+      <div class="quick-item" data-act="open-biz" data-biz="cert">
+        <div class="quick-icon qi-green">证</div><span>证明开具</span>
+      </div>
+      <div class="quick-item" data-act="open-biz" data-biz="social">
+        <div class="quick-icon qi-purple">保</div><span>社保缴费</span>
+      </div>
+      <div class="quick-item" data-act="goto-policy">
+        <div class="quick-icon qi-cyan">策</div><span>政策查询</span>
+      </div>
+      <div class="quick-item" data-act="open-biz" data-biz="appoint">
+        <div class="quick-icon qi-teal">约</div><span>预约办税</span>
+      </div>
+      <div class="quick-item" data-act="page" data-page="info">
+        <div class="quick-icon qi-gray">公</div><span>信息公开</span>
+      </div>
+    </div>
+
+    <div class="card notice-card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>办税提醒</span>
+        <span class="more" data-act="goto-remind">更多 ›</span>
+      </div>
+      <div class="marquee-wrap">
+        <span class="marquee-tag">最新</span>
+        <div class="marquee-viewport">
+          <div class="marquee-track">
+            <span>2026年10月纳税申报期限为10月23日，请及时申报</span>
+            <span>关于调整增值税申报表部分栏次填报口径的公告</span>
+            <span>研发费用加计扣除政策享受指引（2026版）已发布</span>
+            <span>2026年10月纳税申报期限为10月23日，请及时申报</span>
+            <span>关于调整增值税申报表部分栏次填报口径的公告</span>
+            <span>研发费用加计扣除政策享受指引（2026版）已发布</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>办税进度</span>
+        <span class="more" data-act="open-biz" data-biz="progress">全部 ›</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-num c-red">2</div><div class="stat-label">待申报</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c-orange">1</div><div class="stat-label">待缴款</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c-green">6</div><div class="stat-label">已完成</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c-blue">0</div><div class="stat-label">已逾期</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>常用服务</span>
+        <span class="more" data-act="open-biz" data-biz="services">全部 ›</span>
+      </div>
+      <div class="list">
+        <div class="list-item" data-act="open-biz" data-biz="iit">
+          <div class="li-icon li-red">个</div>
+          <div class="li-body"><div class="li-title">个人所得税</div><div class="li-sub">综合所得年度汇算 / 专项附加扣除</div></div>
+          <div class="li-arrow">›</div>
+        </div>
+        <div class="list-item" data-act="open-biz" data-biz="company">
+          <div class="li-icon li-blue">企</div>
+          <div class="li-body"><div class="li-title">企业开办</div><div class="li-sub">新办纳税人套餐式服务</div></div>
+          <div class="li-arrow">›</div>
+        </div>
+        <div class="list-item" data-act="open-biz" data-biz="export">
+          <div class="li-icon li-green">出</div>
+          <div class="li-body"><div class="li-title">出口退税</div><div class="li-sub">出口退税申报与进度查询</div></div>
+          <div class="li-arrow">›</div>
+        </div>
+        <div class="list-item" data-act="open-biz" data-biz="credit">
+          <div class="li-icon li-orange">信</div>
+          <div class="li-body"><div class="li-title">纳税信用</div><div class="li-sub">信用评价结果查询与复评</div></div>
+          <div class="li-arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>办税服务厅</span>
+        <span class="more" data-act="open-biz" data-biz="halls">导航 ›</span>
+      </div>
+      <div class="hall-row">
+        <div class="hall-item hall-item-nav">
+          <div class="hall-info">
+            <div class="hall-name">第一税务分局办税服务厅</div>
+            <div class="hall-addr">北京市西城区月坛北街 15 号</div>
+            <div class="hall-tag">距离 1.2km · 营业中 08:30-17:00</div>
+          </div>
+          <div class="hall-nav-btn" data-act="open-nav" data-hall="0">导航</div>
+        </div>
+        <div class="hall-item hall-item-nav">
+          <div class="hall-info">
+            <div class="hall-name">第二税务分局办税服务厅</div>
+            <div class="hall-addr">北京市朝阳区建国路 88 号</div>
+            <div class="hall-tag">距离 3.6km · 营业中 08:30-17:00</div>
+          </div>
+          <div class="hall-nav-btn" data-act="open-nav" data-hall="1">导航</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>办税数据概览</span>
+        <span class="more">本月</span>
+      </div>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 340 160" class="bar-chart" id="homeChart"></svg>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <div>国家税务总局 · 网上办税服务厅</div>
+      <div>本页面为演示界面，数据均为模拟示例</div>
+    </div>
+  </section>
+
+  <!-- ---------- 消息模块 ---------- -->
+  <section class="page" id="page-message">
+    <div class="sub-header">
+      <div class="sub-title">消息中心</div>
+      <div class="sub-action" data-act="read-all">全部已读</div>
+    </div>
+
+    <div class="msg-tabs" id="msgTabs">
+      <div class="msg-tab active" data-tab="all">全部</div>
+      <div class="msg-tab" data-tab="notice">通知公告</div>
+      <div class="msg-tab" data-tab="tax">税务提醒</div>
+      <div class="msg-tab" data-tab="sys">系统消息</div>
+    </div>
+
+    <div class="msg-list" id="msgList"></div>
+
+    <div class="footer-note"><div>— 已显示全部消息 —</div></div>
+  </section>
+
+  <!-- ---------- 信息模块 ---------- -->
+  <section class="page" id="page-info">
+    <div class="sub-header">
+      <div class="sub-title">信息公开</div>
+      <div class="sub-action" data-act="toast" data-msg="已刷新最新公开信息">刷新</div>
+    </div>
+
+    <div class="info-tabs" id="infoTabs">
+      <div class="info-tab active" data-tab="policy">政策公告</div>
+      <div class="info-tab" data-tab="news">税务新闻</div>
+      <div class="info-tab" data-tab="guide">办税指南</div>
+      <div class="info-tab" data-tab="law">法律法规</div>
+    </div>
+
+    <div class="info-list" id="infoList"></div>
+  </section>
+
+  <!-- ---------- 我的模块 ---------- -->
+  <section class="page" id="page-mine">
+
+    <!-- 已锁定 -->
+    <div class="locked-wrap" id="lockedView">
+      <div class="locked-icon">
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <rect x="14" y="28" width="36" height="28" rx="4" fill="#c81e2b" opacity="0.92"/>
+          <path d="M22 28v-7a10 10 0 0 1 20 0v7" fill="none" stroke="#c81e2b" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="32" cy="40" r="4" fill="#fff"/>
+          <rect x="30.4" y="41" width="3.2" height="8" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="locked-title">我的模块已锁定</div>
+      <div class="locked-desc">登录后可查看账户余额、联系方式、登录方式、账号管理与网站链接等完整功能</div>
+      <div class="locked-btn" data-act="open-login">立即登录 / 注册</div>
+      <div class="locked-tip">临时登录：重新进入小程序后需重新登录　·　立即登录：永久保持登录状态</div>
+    </div>
+
+    <!-- 已解锁 -->
+    <div class="mine-wrap hidden" id="mineView">
+      <div class="mine-header">
+        <div class="mine-avatar" id="mineAvatar">
+          <span id="mineAvatarText">临</span>
+        </div>
+        <div class="mine-userinfo">
+          <div class="mine-username" id="mineUsername">临时登录</div>
+          <div class="mine-userbadge" id="mineUserBadge">临时登录 · 重新进入需重新登录</div>
+        </div>
+        <div class="mine-logout" data-act="logout">退出</div>
+      </div>
+
+      <div class="balance-card" id="balanceCard">
+        <div class="balance-left">
+          <div class="balance-label">账户余额</div>
+          <div class="balance-value" id="balanceValue">0.00￥</div>
+        </div>
+        <div class="balance-btns">
+          <div class="btn-mini btn-recharge" data-act="open-recharge">充值</div>
+          <div class="btn-mini btn-detail" data-act="open-bill">明细</div>
+        </div>
+      </div>
+
+      <div class="card mine-card">
+        <div class="card-head"><span class="card-title"><i class="bar"></i>我的功能</span></div>
+        <div class="func-grid">
+          <div class="func-item" data-act="open-contact">
+            <div class="func-icon fi-blue">联</div><span>联系方式</span>
+          </div>
+          <div class="func-item" data-act="open-loginway">
+            <div class="func-icon fi-green">登</div><span>登录方式</span>
+          </div>
+          <div class="func-item" data-act="open-account">
+            <div class="func-icon fi-orange">账</div><span>账号管理</span>
+          </div>
+          <div class="func-item" data-act="open-links">
+            <div class="func-icon fi-purple">链</div><span>网站链接</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mine-card">
+        <div class="card-head"><span class="card-title"><i class="bar"></i>我的业务</span></div>
+        <div class="list">
+          <div class="list-item" data-act="open-rec" data-rec="declare">
+            <div class="li-icon li-red">报</div>
+            <div class="li-body"><div class="li-title">申报记录</div><div class="li-sub">查看历史申报数据</div></div>
+            <div class="li-arrow">›</div>
+          </div>
+          <div class="list-item" data-act="open-rec" data-rec="payrec">
+            <div class="li-icon li-blue">缴</div>
+            <div class="li-body"><div class="li-title">缴款记录</div><div class="li-sub">税费缴纳明细查询</div></div>
+            <div class="li-arrow">›</div>
+          </div>
+          <div class="list-item" data-act="open-rec" data-rec="invrec">
+            <div class="li-icon li-orange">票</div>
+            <div class="li-body"><div class="li-title">发票记录</div><div class="li-sub">开票与受票信息</div></div>
+            <div class="li-arrow">›</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <div>国家税务总局 · 网上办税服务厅</div>
+        <div>版本 3.6.2（演示版）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 办税业务详情页（二级页面） ---------- -->
+  <section class="page" id="page-biz">
+    <div class="biz-top">
+      <div class="biz-back" data-act="biz-back">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>返回</span>
+      </div>
+      <div class="biz-top-title" id="bizTopTitle">我要申报</div>
+      <div class="biz-top-right" id="bizTopRight">首页</div>
+    </div>
+
+    <div class="biz-hero">
+      <div class="biz-hero-icon" id="bizHeroIcon">申</div>
+      <div class="biz-hero-info">
+        <div class="biz-hero-name" id="bizHeroName">我要申报</div>
+        <div class="biz-hero-desc" id="bizHeroDesc"></div>
+      </div>
+      <div class="biz-hero-nav hidden" id="bizHeroNav" data-act="open-nav" data-hall="0">导航 ›</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>业务办理</span>
+        <span class="more" id="bizMore" data-act="biz-more">全部 ›</span>
+      </div>
+      <div class="list" id="bizItems"></div>
+    </div>
+
+    <!-- 预约表单（仅预约办税显示） -->
+    <div class="card hidden" id="bizAppointCard">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>填写预约信息</span>
+      </div>
+      <div class="field">
+        <label>选择办税服务厅</label>
+        <div class="chip-row" id="appointHall">
+          <div class="chip active" data-v="第一税务分局办税服务厅">第一税务分局</div>
+          <div class="chip" data-v="第二税务分局办税服务厅">第二税务分局</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>预约日期</label>
+        <input type="date" id="appointDate">
+      </div>
+      <div class="field">
+        <label>预约时段</label>
+        <div class="chip-row" id="appointTime">
+          <div class="chip active" data-v="上午 08:30-12:00">上午 08:30-12:00</div>
+          <div class="chip" data-v="下午 13:30-17:00">下午 13:30-17:00</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>预约业务</label>
+        <div class="chip-row" id="appointBiz">
+          <div class="chip active" data-v="综合业务受理">综合业务</div>
+          <div class="chip" data-v="发票业务">发票业务</div>
+          <div class="chip" data-v="税费缴纳">税费缴纳</div>
+          <div class="chip" data-v="证明开具">证明开具</div>
+        </div>
+      </div>
+      <div class="sheet-btn" data-act="do-appoint">确认预约</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>温馨提示</span>
+      </div>
+      <div class="biz-tips" id="bizTips"></div>
+    </div>
+
+    <div class="footer-note">
+      <div>国家税务总局 · 网上办税服务厅</div>
+    </div>
+  </section>
+
+  <!-- ---------- 我的业务记录页（二级页面） ---------- -->
+  <section class="page" id="page-rec">
+    <div class="biz-top">
+      <div class="biz-back" data-act="rec-back">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>返回</span>
+      </div>
+      <div class="biz-top-title" id="recTopTitle">申报记录</div>
+      <div class="biz-top-right">我的</div>
+    </div>
+
+    <div class="biz-hero">
+      <div class="biz-hero-icon" id="recHeroIcon">报</div>
+      <div class="biz-hero-info">
+        <div class="biz-hero-name" id="recHeroName">申报记录</div>
+        <div class="biz-hero-desc" id="recHeroDesc"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>记录明细</span>
+        <span class="rec-count" id="recCount"></span>
+      </div>
+      <div class="list" id="recItems"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>温馨提示</span>
+      </div>
+      <div class="biz-tips" id="recTips"></div>
+    </div>
+
+    <div class="footer-note">
+      <div>国家税务总局 · 网上办税服务厅</div>
+    </div>
+  </section>
+
+  <!-- ---------- 实名认证页（二级页面） ---------- -->
+  <section class="page" id="page-cert">
+    <div class="biz-top">
+      <div class="biz-back" data-act="cert-back">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>返回</span>
+      </div>
+      <div class="biz-top-title">实名认证</div>
+      <div class="biz-top-right">我的</div>
+    </div>
+
+    <div class="biz-hero">
+      <div class="biz-hero-icon">证</div>
+      <div class="biz-hero-info">
+        <div class="biz-hero-name">实名认证</div>
+        <div class="biz-hero-desc">完善身份信息，解锁全部办税功能</div>
+      </div>
+    </div>
+
+    <!-- 已认证状态横幅（认证成功后显示） -->
+    <div class="card hidden" id="certDoneCard">
+      <div class="cert-done">
+        <div class="cert-done-badge">已认证</div>
+        <div class="cert-done-txt" id="certDoneTxt"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>填写认证信息</span>
+      </div>
+      <div class="cert-field">
+        <div class="cert-label">真实姓名</div>
+        <input type="text" id="certName" placeholder="请输入真实姓名" autocomplete="off">
+      </div>
+      <div class="cert-field">
+        <div class="cert-label">身份证号</div>
+        <input type="text" id="certId" placeholder="请输入 18 位身份证号码" autocomplete="off">
+      </div>
+      <div class="sheet-btn" data-act="do-cert">提交认证</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title"><i class="bar"></i>实名认证示例</span>
+      </div>
+      <div class="cert-demo">
+        <div class="cert-demo-row"><span class="cert-demo-label">真实姓名</span><span class="cert-demo-val">王小明</span></div>
+        <div class="cert-demo-row"><span class="cert-demo-label">身份证号</span><span class="cert-demo-val">522636199908101234</span></div>
+        <div class="cert-demo-tip">以上为实名认证示例数据，不能用于实名认证</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <div>国家税务总局 · 网上办税服务厅</div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= 底部导航 ================= -->
+<nav class="tabbar">
+  <div class="tab-item active" data-page="home">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-6h2.8v6h5.2V11h2.6z"/></svg>
+    </div>
+    <span>首页</span>
+  </div>
+  <div class="tab-item" data-page="message">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg>
+      <i class="tab-badge" id="tabMsgBadge">3</i>
+    </div>
+    <span>消息</span>
+  </div>
+  <div class="tab-item" data-page="info">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 8h8v2H8zM8 12h8v2H8zM8 16h5v2H8z" fill="#fff"/></svg>
+    </div>
+    <span>信息</span>
+  </div>
+  <div class="tab-item" data-page="mine">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 12a4.2 4.2 0 1 0 0-8.4A4.2 4.2 0 0 0 12 12zm0 2c-4.4 0-8 2.4-8 5.4V21h16v-1.6c0-3-3.6-5.4-8-5.4z"/></svg>
+      <i class="tab-lock" id="tabLock">🔒</i>
+    </div>
+    <span>我的</span>
+  </div>
+</nav>
+
+<!-- ================= 登录弹层 ================= -->
+<div class="overlay" id="loginOverlay">
+  <div class="sheet login-sheet">
+    <div class="sheet-close" data-act="close-login">✕</div>
+    <div class="login-logo">
+      <svg viewBox="0 0 48 48" width="46" height="46">
+        <circle cx="24" cy="24" r="22" fill="#c81e2b"/>
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#f7d774" stroke-width="1.4"/>
+        <path d="M24 8l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8-7.2-3.8-7.2 3.8 1.4-8-5.9-5.7 8.1-1.2z" fill="#f7d774"/>
+      </svg>
+    </div>
+    <div class="login-title">国家税务总局 · 网上办税服务厅</div>
+    <div class="login-sub">请选择登录方式</div>
+
+    <div class="login-ways">
+      <div class="way-card" data-act="tab-temp">
+        <div class="way-head">
+          <div class="way-name">临时登录</div>
+          <div class="way-badge badge-temp">重新进入需重新登录</div>
+        </div>
+        <div class="way-desc">使用账号 + 密码快速登录，仅在本次使用期间有效</div>
+      </div>
+      <div class="way-card" data-act="tab-real">
+        <div class="way-head">
+          <div class="way-name">立即登录</div>
+          <div class="way-badge badge-real">永久登录</div>
+        </div>
+        <div class="way-desc">手机号 + 短信验证码登录，长期保持登录状态</div>
+      </div>
+    </div>
+
+    <div class="login-footer">登录即代表同意《用户服务协议》与《隐私政策》</div>
+  </div>
+</div>
+
+<!-- ---------- 临时登录表单 ---------- -->
+<div class="overlay" id="tempOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-temp">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">临时登录</div>
+      <div class="way-badge badge-temp">本次有效</div>
+    </div>
+    <div class="sheet-sub">请输入账号和密码完成登录</div>
+
+    <div class="field">
+      <label>账号</label>
+      <input type="text" id="tempAccount" placeholder="请输入账号" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>密码</label>
+      <input type="password" id="tempPassword" placeholder="请输入密码" autocomplete="off">
+    </div>
+
+    <div class="field-row">
+      <label class="checkbox"><input type="checkbox" id="tempAgree" checked><span>已阅读并同意用户服务协议</span></label>
+    </div>
+
+    <div class="sheet-btn" data-act="do-temp-login">登 录</div>
+    <div class="sheet-tip">提示：临时登录的登录状态仅在本次使用期间有效，重新进入后需重新登录。</div>
+  </div>
+</div>
+
+<!-- ---------- 立即登录表单 ---------- -->
+<div class="overlay" id="realOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-real">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">立即登录</div>
+      <div class="way-badge badge-real">永久登录</div>
+    </div>
+    <div class="sheet-sub">请输入手机号并获取短信验证码</div>
+
+    <div class="field">
+      <label>手机号</label>
+      <input type="tel" id="realPhone" placeholder="请输入手机号" maxlength="11" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>验证码</label>
+      <div class="code-row">
+        <input type="tel" id="realCode" placeholder="请输入 6 位验证码" maxlength="6" autocomplete="off">
+        <div class="code-btn" id="codeBtn" data-act="send-code">获取验证码</div>
+      </div>
+      <div class="code-hint" id="codeHint"></div>
+    </div>
+
+    <div class="field-row">
+      <label class="checkbox"><input type="checkbox" id="realAgree" checked><span>已阅读并同意用户服务协议</span></label>
+    </div>
+
+    <div class="sheet-btn" data-act="do-real-login">登 录</div>
+
+    <div class="divider"><span>其他登录方式</span></div>
+
+    <div class="wx-login" data-act="open-wx-auth">
+      <svg viewBox="0 0 32 32" width="22" height="22">
+        <path fill="#fff" d="M11.6 5C6.5 5 2.4 8.4 2.4 12.6c0 2.4 1.4 4.5 3.6 5.9l-.9 2.7 3.1-1.6c1 .3 2.1.5 3.4.5h.7c-.2-.6-.2-1.2-.2-1.8 0-3.9 3.8-7 8.4-7h.7C20.4 7.5 16.4 5 11.6 5zm-3 4.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zm6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+        <path fill="#fff" d="M29.6 18.3c0-3.5-3.4-6.3-7.6-6.3s-7.6 2.8-7.6 6.3 3.4 6.3 7.6 6.3c.9 0 1.8-.1 2.6-.4l2.6 1.4-.7-2.3c1.8-1.2 3.1-2.9 3.1-5zm-10-1.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm5 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      </svg>
+      <span>微信一键登录</span>
+      <span class="wx-badge">永久登录</span>
+    </div>
+
+    <div class="sheet-tip">提示：立即登录为永久登录，下次进入将自动保持登录状态。</div>
+  </div>
+</div>
+
+<!-- ---------- 微信授权登录弹窗 ---------- -->
+<div class="overlay" id="wxAuthOverlay">
+  <div class="wx-dialog">
+    <div class="wx-dialog-head">
+      <svg viewBox="0 0 32 32" width="26" height="26">
+        <path fill="#07c160" d="M11.6 5C6.5 5 2.4 8.4 2.4 12.6c0 2.4 1.4 4.5 3.6 5.9l-.9 2.7 3.1-1.6c1 .3 2.1.5 3.4.5h.7c-.2-.6-.2-1.2-.2-1.8 0-3.9 3.8-7 8.4-7h.7C20.4 7.5 16.4 5 11.6 5zm-3 4.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zm6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+        <path fill="#07c160" d="M29.6 18.3c0-3.5-3.4-6.3-7.6-6.3s-7.6 2.8-7.6 6.3 3.4 6.3 7.6 6.3c.9 0 1.8-.1 2.6-.4l2.6 1.4-.7-2.3c1.8-1.2 3.1-2.9 3.1-5zm-10-1.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm5 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      </svg>
+      <span class="wx-dialog-brand">微信</span>
+    </div>
+
+    <div class="wx-dialog-title">确认登录</div>
+    <div class="wx-dialog-text">
+      使用<b>微信登录</b>，需要授权您的微信账号。请在下方方框输入您的微信名称即可完成授权登录。
+    </div>
+
+    <div class="wx-dialog-field">
+      <label>微信昵称</label>
+      <input type="text" id="wxNickname" placeholder="请输入您的微信名称" autocomplete="off" maxlength="20">
+    </div>
+
+    <div class="wx-dialog-btns">
+      <div class="wx-btn-cancel" data-act="close-wx-auth">取消</div>
+      <div class="wx-btn-confirm" data-act="do-wx-auth">确认授权</div>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- 微信充值弹层 ---------- -->
+<div class="overlay" id="rechargeOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-recharge">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">微信充值</div>
+    </div>
+    <div class="sheet-sub">
+      此界面需要授权您的<b>微信钱包余额</b>，请按照以下提示并打开您的微信钱包验证充值余额。<br>
+      当前账户余额：<b id="rechargeCur">0.00￥</b>
+    </div>
+
+    <div class="wx-wallet-steps">
+      <div class="wx-steps-title">操作步骤</div>
+      <div class="wx-step">
+        <span class="wx-step-num">1</span>
+        <span class="wx-step-text">打开微信，点击<b>我的</b></span>
+      </div>
+      <div class="wx-step">
+        <span class="wx-step-num">2</span>
+        <span class="wx-step-text">点击<b>服务</b></span>
+      </div>
+      <div class="wx-step">
+        <span class="wx-step-num">3</span>
+        <span class="wx-step-text">点击<b>钱包</b></span>
+      </div>
+      <div class="wx-step">
+        <span class="wx-step-num">4</span>
+        <span class="wx-step-text">点击<b>零钱</b>，核对您的钱包余额</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>微信钱包余额（元）</label>
+      <input type="number" id="walletInput" placeholder="请输入您微信钱包中的余额" min="0" step="0.01">
+      <div class="pay-hint">请按上方步骤查看您的微信钱包余额并如实填写，系统将据此校验本次充值是否可完成。</div>
+    </div>
+
+    <div class="field">
+      <label>充值金额（元）</label>
+      <input type="number" id="rechargeInput" placeholder="请输入充值金额（单笔最多 100000 元）" min="0" max="100000" step="0.01">
+      <div class="pay-hint">单笔充值金额最多 100000 元（10 万），请输入 0.01 ~ 100000 之间的金额。</div>
+    </div>
+
+    <div class="field">
+      <label>微信支付密码</label>
+      <input type="password" id="payPassword" placeholder="请输入 6 位微信支付密码" maxlength="6" autocomplete="off" inputmode="numeric">
+      <div class="pay-hint">提示：微信支付密码必须为 6 位数字，不能多于 6 位，也不能少于 6 位。输入任意 6 位数字即可通过验证，支付密码仅用于身份验证，不会被记录或上传。</div>
+    </div>
+
+    <div class="sheet-btn" data-act="do-recharge">确认充值</div>
+    <div class="sheet-tip">验证通过后，充值金额将直接计入账户余额。</div>
+  </div>
+</div>
+
+<!-- ---------- 账单明细弹层 ---------- -->
+<div class="overlay" id="billOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-bill">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">账户明细</div>
+    </div>
+    <div class="bill-list" id="billList"></div>
+  </div>
+</div>
+
+<!-- ---------- 联系方式弹层 ---------- -->
+<div class="overlay" id="contactOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-contact">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">联系方式</div>
+    </div>
+    <div class="sheet-sub">请完善您的联系方式，便于接收办税提醒</div>
+
+    <div class="field">
+      <label>手机号码</label>
+      <input type="tel" id="contactPhone" placeholder="请输入手机号码" maxlength="11">
+    </div>
+    <div class="field">
+      <label>电子邮箱</label>
+      <input type="text" id="contactEmail" placeholder="请输入电子邮箱">
+    </div>
+    <div class="field">
+      <label>办税服务厅</label>
+      <input type="text" id="contactHall" placeholder="请选择所属办税服务厅" value="第一税务分局办税服务厅">
+    </div>
+    <div class="field">
+      <label>联系地址</label>
+      <input type="text" id="contactAddr" placeholder="请输入联系地址">
+    </div>
+
+    <div class="sheet-btn" data-act="save-contact">保 存</div>
+  </div>
+</div>
+
+<!-- ---------- 登录方式弹层 ---------- -->
+<div class="overlay" id="loginwayOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-loginway">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">登录方式</div>
+    </div>
+    <div class="sheet-sub">当前登录方式与账号安全设置</div>
+
+    <div class="way-list">
+      <div class="way-line">
+        <div class="way-line-left">
+          <div class="wl-name">当前登录方式</div>
+          <div class="wl-sub" id="currentWayName">临时登录</div>
+        </div>
+        <div class="way-badge" id="currentWayBadge">重新进入需重新登录</div>
+      </div>
+      <div class="way-line">
+        <div class="way-line-left">
+          <div class="wl-name">登录设备</div>
+          <div class="wl-sub">本机浏览器 · 演示环境</div>
+        </div>
+        <div class="wl-tag">当前设备</div>
+      </div>
+      <div class="way-line">
+        <div class="way-line-left">
+          <div class="wl-name">账号保护</div>
+          <div class="wl-sub">短信验证 / 登录提醒</div>
+        </div>
+        <div class="wl-tag tag-on">已开启</div>
+      </div>
+    </div>
+
+    <div class="sheet-tip">如需永久登录，请使用「立即登录」并通过手机号短信验证。</div>
+  </div>
+</div>
+
+<!-- ---------- 账号管理弹层 ---------- -->
+<div class="overlay" id="accountOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-account">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">账号管理</div>
+    </div>
+    <div class="sheet-sub">账号信息与安全管理</div>
+
+    <div class="account-head">
+      <div class="account-avatar" id="accountAvatar"><span id="accountAvatarText">临</span></div>
+      <div>
+        <div class="account-name" id="accountName">临时登录</div>
+        <div class="account-id" id="accountId">账号 ID：TEMP-0001</div>
+      </div>
+    </div>
+
+    <div class="way-list">
+      <div class="way-line clickable" data-act="open-cert">
+        <div class="way-line-left">
+          <div class="wl-name">实名认证</div>
+          <div class="wl-sub">完善身份信息，解锁全部办税功能</div>
+        </div>
+        <span class="cert-badge no" id="certBadge">未认证</span>
+        <div class="li-arrow">›</div>
+      </div>
+      <div class="way-line clickable" data-act="open-pwd">
+        <div class="way-line-left">
+          <div class="wl-name">修改密码</div>
+          <div class="wl-sub">定期修改密码，保障账号安全</div>
+        </div>
+        <div class="li-arrow">›</div>
+      </div>
+      <div class="way-line clickable" data-act="open-del">
+        <div class="way-line-left">
+          <div class="wl-name">账号注销</div>
+          <div class="wl-sub">注销后办税数据将无法找回</div>
+        </div>
+        <div class="li-arrow">›</div>
+      </div>
+    </div>
+
+    <div class="sheet-btn btn-danger" data-act="logout">退出当前账号</div>
+  </div>
+</div>
+
+<!-- ---------- 网站链接弹层 ---------- -->
+<div class="overlay" id="linksOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-links">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">网站链接</div>
+    </div>
+    <div class="sheet-sub">常用官方办税网站导航</div>
+
+    <div class="link-grid">
+      <a class="link-item" href="https://www.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-red">总</div><span>国家税务总局</span>
+      </a>
+      <a class="link-item" href="https://etax.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-blue">电</div><span>电子税务局</span>
+      </a>
+      <a class="link-item" href="https://12366.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-green">询</div><span>12366 纳税服务</span>
+      </a>
+      <a class="link-item" href="https://www.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-orange">策</div><span>税收政策法规库</span>
+      </a>
+      <a class="link-item" href="https://www.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-purple">票</div><span>全国增值税发票查验</span>
+      </a>
+      <a class="link-item" href="https://www.chinatax.gov.cn" target="_blank" rel="noopener">
+        <div class="func-icon fi-cyan">信</div><span>纳税信用查询</span>
+      </a>
+    </div>
+
+    <div class="sheet-tip">以上链接均为国家税务总局官方站点，将在新窗口打开。</div>
+  </div>
+</div>
+
+<!-- ---------- 修改密码弹层 ---------- -->
+<div class="overlay" id="pwdOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-pwd">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">修改密码</div>
+    </div>
+    <div class="sheet-sub">定期修改密码，保障账号安全</div>
+
+    <div class="pwd-account">当前账号：<b id="pwdAccount">—</b></div>
+
+    <div class="field">
+      <label>原密码</label>
+      <input type="password" id="pwdOld" placeholder="请输入原密码" maxlength="20" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>新密码</label>
+      <input type="password" id="pwdNew" placeholder="请输入新密码" autocomplete="off">
+    </div>
+
+    <div class="sheet-btn" data-act="do-changepwd">确定修改</div>
+    <div class="sheet-tip">首次设置密码时，原密码输入任意内容即可。修改成功后，请牢记新密码。</div>
+  </div>
+</div>
+
+<!-- ---------- 账号注销弹层 ---------- -->
+<div class="overlay" id="delOverlay">
+  <div class="sheet">
+    <div class="sheet-close" data-act="close-del">✕</div>
+    <div class="sheet-title-row">
+      <div class="sheet-bar"></div>
+      <div class="sheet-title">账号注销</div>
+    </div>
+    <div class="sheet-sub">注销后办税数据将无法找回</div>
+
+    <div class="account-head">
+      <div class="account-avatar"><span id="delAvatarText">临</span></div>
+      <div>
+        <div class="account-name" id="delName">—</div>
+        <div class="account-id" id="delId">账号 ID：—</div>
+      </div>
+    </div>
+
+    <div class="del-warn">
+      <div class="del-warn-title">注销将清空以下数据</div>
+      <div class="del-warn-item">· 登录状态与账号信息</div>
+      <div class="del-warn-item">· 账户余额与收支明细</div>
+      <div class="del-warn-item">· 实名认证信息</div>
+      <div class="del-warn-item">· 已修改的登录密码与联系方式</div>
+      <div class="del-warn-tip">注销为不可恢复操作，本机所有办税数据将被立即清除。</div>
+    </div>
+
+    <label class="checkbox del-agree">
+      <input type="checkbox" id="delAgree">
+      <span>我已知晓注销后果，同意注销当前账号</span>
+    </label>
+
+    <div class="sheet-btn btn-danger" data-act="do-del">确认注销</div>
+    <div class="sheet-tip">如只是想退出登录，请使用账号管理底部的「退出当前账号」。</div>
+  </div>
+</div>
+
+<!-- ---------- 通用弹窗(短信/提示) ---------- -->
+<div class="overlay" id="alertOverlay">
+  <div class="alert-box">
+    <div class="alert-title" id="alertTitle">提示</div>
+    <div class="alert-body" id="alertBody"></div>
+    <div class="alert-btn" id="alertBtn" data-act="close-alert">我知道了</div>
+  </div>
+</div>
+
+<!-- ---------- 服务厅导航界面 ---------- -->
+<div class="overlay" id="navOverlay">
+  <div class="nav-box">
+    <div class="sheet-close" data-act="close-nav">✕</div>
+    <div class="nav-box-title" id="navTitle">办税服务厅</div>
+    <div class="nav-rows">
+      <div class="nav-row">
+        <span class="nav-label">地址</span>
+        <span class="nav-value" id="navAddr"></span>
+      </div>
+      <div class="nav-row">
+        <span class="nav-label">详细地址</span>
+        <span class="nav-value" id="navDetail"></span>
+      </div>
+      <div class="nav-row">
+        <span class="nav-label">营业时间</span>
+        <span class="nav-value" id="navTime"></span>
+      </div>
+    </div>
+    <div class="nav-map-hint">使用高德地图即可查看完整地址</div>
+    <div class="nav-use-btn" data-act="open-amap">使用</div>
+  </div>
+</div>
+
+<!-- ---------- 短信模拟浮层 ---------- -->
+<div class="sms-toast" id="smsToast">
+  <div class="sms-head">
+    <span class="sms-from">10690218</span>
+    <span class="sms-time" id="smsTime">刚刚</span>
+  </div>
+  <div class="sms-body">
+    【国家税务总局】您的验证码是 <b id="smsCode">------</b>，5分钟内有效，请勿泄露给他人。
+  </div>
+</div>
+
+<!-- ---------- 全局 Toast ---------- -->
+<div class="toast" id="globalToast"></div>
+
+<script>
+/* =========================================================
+   国家税务总局 · 网上办税服务厅  演示脚本
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------------- 存储键 ---------------- */
+  const K_PERSIST = 'tax_login_persist';   // 永久登录信息（仅"立即登录/微信"写入）
+  const K_BALANCE = 'tax_balance';         // 账户余额
+  const K_BILL    = 'tax_bill';            // 收支明细
+  const K_PROFILE = 'tax_profile';         // 联系方式等资料
+  const K_CERT    = 'tax_cert';            // 实名认证信息
+  const K_PWD     = 'tax_pwd';             // 当前账号的登录密码（修改密码用）
+
+  /* ---------------- 全局状态 ---------------- */
+  let currentUser = null;   // {mode:'temp'|'real'|'wx', name, avatarText, account}
+  let balance = 0;          // 账户余额（数字）
+  let bills = [];           // 明细记录
+  let smsCode = '';         // 当前短信验证码
+  let codeTimer = null;     // 验证码倒计时
+  let lastCodePhone = '';   // 发送验证码的手机号
+  let certInfo = null;      // 实名认证信息 {name, id, time}
+
+  /* ---------------- 工具函数 ---------------- */
+  const $  = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+
+  function money(n) {
+    let v = Number(n || 0);
+    if (!isFinite(v) || isNaN(v)) v = 0;
+    return v.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '￥';
+  }
+
+  function nowTime() {
+    const d = new Date();
+    const p = v => String(v).padStart(2, '0');
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+           ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+  }
+
+  function isPhone(v) { return /^1[3-9]\d{9}$/.test(v); }
+
+  /* 手机号脱敏：193****8535（前3位 + **** + 后4位） */
+  function maskPhone(v) {
+    if (!isPhone(v)) return v;
+    return v.slice(0, 3) + '****' + v.slice(7);
+  }
+
+  function toast(msg) {
+    const el = $('#globalToast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => el.classList.remove('show'), 1800);
+  }
+
+  function alertBox(title, body, btnText) {
+    $('#alertTitle').textContent = title;
+    $('#alertBody').innerHTML = body;
+    $('#alertBtn').textContent = btnText || '我知道了';
+    $('#alertOverlay').classList.add('show');
+  }
+
+  function openOverlay(id) { $('#' + id).classList.add('show'); }
+  function closeOverlay(id) { $('#' + id).classList.remove('show'); }
+
+  /* ---------------- 本地存储读写 ---------------- */
+  function safeGet(storage, key) {
+    try { return storage.getItem(key); } catch (e) { return null; }
+  }
+  function safeSet(storage, key, val) {
+    try { storage.setItem(key, val); } catch (e) { /* 隐私模式忽略 */ }
+  }
+  function safeDel(storage, key) {
+    try { storage.removeItem(key); } catch (e) { /* ignore */ }
+  }
+
+  function loadBalance() {
+    const v = safeGet(localStorage, K_BALANCE);
+    balance = v === null || v === '' ? 0 : Number(v);
+    /* 异常数据防护：非数字 / 负数 / 超过 9999 万的历史脏数据（如 1e+35）一律归零，
+       单笔充值上限 10 万元，正常累计不可能达到该值 */
+    if (isNaN(balance) || !isFinite(balance) || balance < 0 || balance > 99999999) {
+      balance = 0;
+      saveBalance();
+    }
+  }
+  function saveBalance() { safeSet(localStorage, K_BALANCE, String(balance)); }
+
+  function loadBills() {
+    try {
+      const raw = safeGet(localStorage, K_BILL);
+      bills = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(bills)) bills = [];
+    } catch (e) { bills = []; }
+  }
+  function saveBills() { safeSet(localStorage, K_BILL, JSON.stringify(bills.slice(0, 60))); }
+
+  function loadProfile() {
+    try {
+      const raw = safeGet(localStorage, K_PROFILE);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+  function saveProfile(p) { safeSet(localStorage, K_PROFILE, JSON.stringify(p)); }
+
+  /* ---------------- 实名认证 ---------------- */
+  /* 实名认证示例（示例数据不允许用来实名） */
+  const CERT_DEMO_NAME = '王小明';
+  const CERT_DEMO_ID   = '522636199908101234';
+
+  function loadCert() {
+    try {
+      const raw = safeGet(localStorage, K_CERT);
+      const c = raw ? JSON.parse(raw) : null;
+      certInfo = (c && c.name && c.id) ? c : null;
+    } catch (e) { certInfo = null; }
+  }
+  function saveCert() {
+    if (certInfo) safeSet(localStorage, K_CERT, JSON.stringify(certInfo));
+    else safeDel(localStorage, K_CERT);
+  }
+
+  /* 更新"已认证 / 未认证"徽标与认证页横幅 */
+  function renderCertBadge() {
+    const b = $('#certBadge');
+    if (b) {
+      if (certInfo) { b.textContent = '已认证'; b.className = 'cert-badge yes'; }
+      else { b.textContent = '未认证'; b.className = 'cert-badge no'; }
+    }
+    const done = $('#certDoneCard');
+    if (done) {
+      done.classList.toggle('hidden', !certInfo);
+      if (certInfo) {
+        const nm = certInfo.name || '';
+        const maskedName = nm.length <= 1 ? nm : nm.charAt(0) + '*'.repeat(Math.max(nm.length - 1, 1));
+        const id = certInfo.id || '';
+        const maskedId = id.length >= 10 ? id.slice(0, 4) + '**********' + id.slice(-4) : id;
+        $('#certDoneTxt').textContent = maskedName + '　' + maskedId;
+      }
+    }
+  }
+
+  /* ---------------- 登录态管理 ---------------- */
+  /* 临时登录只保存在内存变量中，不写入任何存储：
+     刷新页面 / 关闭后重新进入 → 内存清空 → 自动退出登录
+     永久登录写入 localStorage → 重新进入仍保持登录 */
+  function restoreUser() {
+    const perm = safeGet(localStorage, K_PERSIST);
+    if (perm) {
+      try {
+        const u = JSON.parse(perm);
+        if (u && u.mode) { currentUser = u; return; }
+      } catch (e) { /* ignore */ }
+    }
+    currentUser = null;
+  }
+
+  function savePermUser(u) {
+    safeSet(localStorage, K_PERSIST, JSON.stringify(u));
+  }
+  function clearUser() {
+    safeDel(localStorage, K_PERSIST);
+    currentUser = null;   // 临时登录随内存一起释放
+  }
+
+  /* ---------------- 界面渲染 ---------------- */
+  function renderMine() {
+    const locked = $('#lockedView');
+    const mine = $('#mineView');
+
+    if (!currentUser) {
+      locked.classList.remove('hidden');
+      mine.classList.add('hidden');
+      $('#tabLock').classList.remove('hidden');
+      $('#headerMine').textContent = '登录';
+      return;
+    }
+
+    locked.classList.add('hidden');
+    mine.classList.remove('hidden');
+    $('#tabLock').classList.add('hidden');
+    $('#headerMine').textContent = '我的';
+
+    /* 头像 */
+    const av = $('#mineAvatar');
+    const avText = $('#mineAvatarText');
+    av.className = 'mine-avatar ' + (currentUser.mode === 'temp' ? 'temp'
+                   : currentUser.mode === 'wx' ? 'wx' : 'real');
+    avText.textContent = currentUser.avatarText;
+
+    /* 用户名 */
+    $('#mineUsername').textContent = currentUser.name;
+    $('#mineUserBadge').textContent = currentUser.mode === 'temp'
+      ? '临时登录 · 重新进入需重新登录'
+      : (currentUser.mode === 'wx' ? '微信登录 · 永久登录' : '立即登录 · 永久登录');
+
+    /* 账号管理里的信息 */
+    $('#accountAvatarText').textContent = currentUser.avatarText;
+    $('#accountName').textContent = currentUser.name;
+    $('#accountId').textContent = '账号 ID：' + (currentUser.account || '—');
+
+    /* 登录方式 */
+    $('#currentWayName').textContent =
+      currentUser.mode === 'temp' ? '临时登录（账号 + 密码）'
+      : currentUser.mode === 'wx' ? '微信一键登录' : '立即登录（手机号 + 短信验证码）';
+    const badge = $('#currentWayBadge');
+    badge.textContent = currentUser.mode === 'temp' ? '重新进入需重新登录' : '永久登录';
+    badge.className = 'way-badge ' + (currentUser.mode === 'temp' ? 'badge-temp' : 'badge-real');
+
+    renderBalance();
+    renderProfile();
+    renderCertBadge();
+  }
+
+  function renderBalance() {
+    const txt = money(balance);
+    $('#balanceValue').textContent = txt;
+    $('#rechargeCur').textContent = txt;
+  }
+
+  function renderProfile() {
+    const p = loadProfile();
+    if (p.phone) $('#contactPhone').value = p.phone;
+    if (p.email) $('#contactEmail').value = p.email;
+    if (p.hall) $('#contactHall').value = p.hall;
+    if (p.addr) $('#contactAddr').value = p.addr;
+  }
+
+  function renderBills() {
+    const box = $('#billList');
+    if (!bills.length) {
+      box.innerHTML = '<div class="bill-empty">暂无账户明细</div>';
+      return;
+    }
+    box.innerHTML = bills.map(b => `
+      <div class="bill-item">
+        <div class="bill-left">
+          <div class="bill-title">${b.title}</div>
+          <div class="bill-time">${b.time}</div>
+        </div>
+        <div class="bill-amount ${b.type === 'in' ? 'in' : 'out'}">
+          ${b.type === 'in' ? '+' : '-'}${Number(b.amount).toFixed(2)}￥
+        </div>
+      </div>`).join('');
+  }
+
+  function addBill(title, amount, type) {
+    bills.unshift({ title: title, amount: amount, type: type, time: nowTime() });
+    saveBills();
+    renderBills();
+  }
+
+  /* ---------------- 页面切换 ---------------- */
+  function goPage(name) {
+    $$('.page').forEach(p => p.classList.remove('active'));
+    const target = $('#page-' + name);
+    if (target) target.classList.add('active');
+
+    /* 业务页是首页的二级页，底部导航保持"首页"高亮；
+       记录页 / 实名认证页是"我的"的二级页，保持"我的"高亮 */
+    const tabName = (name === 'biz') ? 'home'
+                  : (name === 'rec' || name === 'cert') ? 'mine'
+                  : name;
+    $$('.tab-item').forEach(t => {
+      t.classList.toggle('active', t.dataset.page === tabName);
+    });
+
+    const main = $('#appMain');
+    if (main) main.scrollTop = 0;
+
+    if (name === 'mine') renderMine();
+  }
+
+  /* ---------------- 首页柱状图 ---------------- */
+  function drawHomeChart() {
+    const svg = $('#homeChart');
+    if (!svg) return;
+    const data = [
+      { l: '5月', v: 62 }, { l: '6月', v: 48 }, { l: '7月', v: 75 },
+      { l: '8月', v: 55 }, { l: '9月', v: 88 }, { l: '10月', v: 70 }
+    ];
+    const max = 100, W = 340, H = 160;
+    const padL = 34, padB = 26, padT = 14;
+    const chartH = H - padB - padT;
+    const bw = 22, gap = (W - padL - 16 - data.length * bw) / (data.length - 1);
+
+    let s = '';
+    /* 网格线 */
+    for (let i = 0; i <= 4; i++) {
+      const y = padT + chartH - (chartH / 4) * i;
+      s += `<line x1="${padL}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="#eef0f4" stroke-width="1"/>`;
+      s += `<text x="${padL - 8}" y="${y + 3.5}" font-size="8.5" fill="#a8aeb8" text-anchor="end">${max / 4 * i}</text>`;
+    }
+    /* 柱条 */
+    data.forEach((d, i) => {
+      const h = (d.v / max) * chartH;
+      const x = padL + 6 + i * (bw + gap);
+      const y = padT + chartH - h;
+      const isLast = i === data.length - 1;
+      s += `<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="5"
+              fill="${isLast ? '#c81e2b' : '#e8919a'}" opacity="${isLast ? 1 : .85}"/>`;
+      s += `<text x="${x + bw / 2}" y="${y - 5}" font-size="9" fill="${isLast ? '#c81e2b' : '#8f959e'}"
+              text-anchor="middle" font-weight="600">${d.v}</text>`;
+      s += `<text x="${x + bw / 2}" y="${H - 8}" font-size="9.5" fill="#8f959e" text-anchor="middle">${d.l}</text>`;
+    });
+    svg.innerHTML = s;
+  }
+
+  /* ---------------- 消息数据 ---------------- */
+  const MESSAGES = [
+    { type: 'notice', date: '2026-10-05', title: '关于2026年10月纳税申报期限的通知', text: '根据《中华人民共和国税收征收管理法》有关规定，2026年10月纳税申报期限为10月23日，请广大纳税人及时完成申报。', unread: true },
+    { type: 'tax', date: '2026-10-03', title: '您有一条待办：增值税申报待提交', text: '您所属期2026年9月的增值税申报表尚未提交，请于申报期结束前完成申报，以免产生滞纳金。', unread: true },
+    { type: 'notice', date: '2026-09-28', title: '关于调整增值税申报表部分栏次填报口径的公告', text: '为进一步优化纳税服务、减轻办税负担，税务总局对增值税申报表部分栏次填报口径进行了调整，自2026年10月1日起施行。', unread: true },
+    { type: 'sys', date: '2026-09-25', title: '系统维护公告', text: '为提升系统稳定性，网上办税服务厅将于2026年9月30日22:00至次日02:00进行系统维护，期间部分功能暂停使用，敬请谅解。', unread: false },
+    { type: 'tax', date: '2026-09-20', title: '研发费用加计扣除政策享受指引（2026版）', text: '符合条件的企业在10月份预缴申报时，可自主选择就前三季度研发费用享受加计扣除优惠政策，请及时关注相关政策指引。', unread: false },
+    { type: 'notice', date: '2026-09-15', title: '关于开展纳税信用评价工作的通知', text: '2026年度纳税信用评价工作已启动，评价结果将影响发票领用、出口退税等业务办理，请关注您的信用状况。', unread: false },
+    { type: 'sys', date: '2026-09-10', title: '个人所得税专项附加扣除信息确认提醒', text: '请您及时确认2027年度个人所得税专项附加扣除信息，确保依法准确享受税收优惠政策。', unread: false },
+    { type: 'tax', date: '2026-09-01', title: '小规模纳税人减免增值税政策延续', text: '增值税小规模纳税人月销售额10万元以下的，免征增值税；适用3%征收率的应税销售收入，减按1%征收率征收增值税。', unread: false }
+  ];
+
+  const MSG_TAB_CLASS = { notice: 'mt-notice', tax: 'mt-tax', sys: 'mt-sys' };
+  const MSG_TAB_NAME = { notice: '通知公告', tax: '税务提醒', sys: '系统消息' };
+
+  function renderMessages(tab) {
+    const list = MESSAGES.filter(m => tab === 'all' || m.type === tab);
+    const box = $('#msgList');
+    if (!list.length) {
+      box.innerHTML = '<div class="bill-empty">暂无消息</div>';
+      return;
+    }
+    box.innerHTML = list.map(m => `
+      <div class="msg-item ${m.unread ? '' : 'read'}" data-msg="${m.title}">
+        <div class="msg-top">
+          <span class="msg-type ${MSG_TAB_CLASS[m.type]}">${MSG_TAB_NAME[m.type]}</span>
+          <span class="msg-date">${m.date}</span>
+        </div>
+        <div class="msg-title">${m.title}</div>
+        <div class="msg-text">${m.text}</div>
+        <div class="msg-foot">
+          <span class="dot-unread"></span>
+          <span>${m.unread ? '未读' : '已读'}</span>
+          <span style="margin-left:auto">查看详情 ›</span>
+        </div>
+      </div>`).join('');
+
+    updateMsgBadge();
+  }
+
+  /* 未读消息角标：随已读状态实时更新，无未读时隐藏 */
+  function updateMsgBadge() {
+    const n = MESSAGES.filter(m => m.unread).length;
+    const badge = $('#tabMsgBadge');
+    if (!badge) return;
+    badge.textContent = n;
+    badge.style.display = n > 0 ? '' : 'none';
+  }
+
+  /* ---------------- 信息数据 ---------------- */
+  const INFO = [
+    { tab: 'policy', date: '2026-10-05', title: '关于2026年10月纳税申报期限的通知', summary: '2026年10月纳税申报期限为10月23日，请纳税人合理安排时间，及时完成各项税费申报与缴纳。', src: '国家税务总局公告', read: '2.6万' },
+    { tab: 'policy', date: '2026-09-28', title: '关于调整增值税申报表部分栏次填报口径的公告', summary: '为优化纳税服务、减轻办税负担，对增值税申报表部分栏次填报口径进行调整，自2026年10月1日起施行。', src: '国家税务总局公告', read: '1.8万' },
+    { tab: 'policy', date: '2026-09-20', title: '研发费用加计扣除政策享受指引（2026版）', summary: '企业在10月份预缴申报时，可自主选择就前三季度研发费用享受加计扣除优惠政策，进一步降低企业税负。', src: '政策指引', read: '3.1万' },
+    { tab: 'policy', date: '2026-09-08', title: '关于延续实施小规模纳税人减免增值税政策的公告', summary: '增值税小规模纳税人月销售额10万元以下的免征增值税，适用3%征收率的销售收入减按1%征收。', src: '国家税务总局公告', read: '5.4万' },
+    { tab: 'news', date: '2026-10-02', title: '全国税务系统持续优化税收营商环境', summary: '今年以来，税务部门持续深化"放管服"改革，推出多项便民举措，纳税人平均办税时间进一步压缩。', src: '税务新闻', read: '9876' },
+    { tab: 'news', date: '2026-09-26', title: '税务部门开展"便民办税春风行动"阶段性成果发布', summary: '围绕"办好惠民事·服务现代化"主题，推出系列便民办税措施，累计惠及纳税人缴费人数千万户次。', src: '税务新闻', read: '1.2万' },
+    { tab: 'news', date: '2026-09-18', title: '税收大数据助力企业纾困发展', summary: '税务部门运用税收大数据为困难企业精准匹配政策，推动税费优惠政策直达快享。', src: '税务新闻', read: '8642' },
+    { tab: 'news', date: '2026-09-05', title: '跨区域涉税事项办理实现"全程网办"', summary: '跨区域涉税事项报告、报验、申报等业务已实现全程网上办理，进一步便利企业跨区域经营。', src: '税务新闻', read: '7631' },
+    { tab: 'guide', date: '2026-09-30', title: '增值税一般纳税人申报办理指南', summary: '包括申报期限、申报表填写要点、网上申报操作流程、常见问题解答等内容，帮助纳税人准确申报。', src: '办税指南', read: '2.2万' },
+    { tab: 'guide', date: '2026-09-22', title: '个人所得税综合所得年度汇算操作指引', summary: '详细介绍年度汇算的办理时间、办理方式、专项附加扣除填报、退补税办理等操作步骤。', src: '办税指南', read: '4.7万' },
+    { tab: 'guide', date: '2026-09-12', title: '发票申领与开具操作手册', summary: '覆盖发票票种核定、领用、开具、查验和缴销等全流程操作说明。', src: '办税指南', read: '1.5万' },
+    { tab: 'guide', date: '2026-09-02', title: '社保费申报缴纳操作指南', summary: '单位及个人社保费申报、缴费渠道、缴费凭证获取等常见问题说明。', src: '办税指南', read: '1.9万' },
+    { tab: 'law', date: '2026-08-28', title: '中华人民共和国税收征收管理法（节选）', summary: '明确纳税人、扣缴义务人的权利义务，规范税收征收与缴纳行为，保障国家税收收入。', src: '法律法规', read: '3.3万' },
+    { tab: 'law', date: '2026-08-15', title: '中华人民共和国增值税暂行条例（节选）', summary: '规定增值税的纳税人、征税范围、税率、应纳税额计算等基本内容。', src: '法律法规', read: '2.8万' },
+    { tab: 'law', date: '2026-08-05', title: '中华人民共和国企业所得税法（节选）', summary: '规定企业所得税的纳税人、应纳税所得额、税率、税收优惠等基本内容。', src: '法律法规', read: '3.6万' },
+    { tab: 'law', date: '2026-07-20', title: '中华人民共和国个人所得税法（节选）', summary: '规定个人所得税的纳税人、征税范围、税率、专项附加扣除等基本内容。', src: '法律法规', read: '5.1万' }
+  ];
+
+  const INFO_TAG = { policy: '政策公告', news: '税务新闻', guide: '办税指南', law: '法律法规' };
+
+  /* ---------------- 办税业务页面数据 ---------------- */
+  const BIZ = {
+    declare: {
+      name: '我要申报', icon: '申', color: 'blue',
+      desc: '增值税、企业所得税等各税种纳税申报，全程网上办',
+      items: [
+        { n: '增值税及附加税费申报（一般纳税人）', s: '按月 / 按季申报，附列资料线上填报' },
+        { n: '增值税及附加税费申报（小规模纳税人）', s: '按季申报，月销售额 10 万元以下免征增值税' },
+        { n: '企业所得税预缴申报', s: '按月 / 按季预缴企业所得税申报' },
+        { n: '个人所得税经营所得申报', s: '查账征收 / 核定征收经营所得申报' },
+        { n: '财务报表报送', s: '资产负债表 / 利润表 / 现金流量表报送' }
+      ],
+      tips: '2026年10月申报期限为10月23日，申报期内办理可享受错峰限流服务，请合理安排申报时间，避免逾期产生滞纳金。'
+    },
+    invoice: {
+      name: '发票业务', icon: '票', color: 'orange',
+      desc: '发票代开、领用、查验等发票全流程业务办理',
+      items: [
+        { n: '代开增值税发票', s: '自然人 / 小规模纳税人代开发票申请' },
+        { n: '发票票种核定', s: '首次申领发票前的票种核定申请' },
+        { n: '发票领用（申领）', s: '网上申领，可选择邮寄或窗口自取' },
+        { n: '发票查验', s: '输入发票代码号码在线查验发票真伪' },
+        { n: '发票缴销', s: '改版、换版、次票的缴销办理' }
+      ],
+      tips: '开具发票请如实填报商品与服务名称，虚开发票属于违法行为，将依法承担相应法律责任。'
+    },
+    pay: {
+      name: '税费缴纳', icon: '缴', color: 'red',
+      desc: '税费、滞纳金线上缴纳与缴款凭证查询',
+      items: [
+        { n: '税费缴纳', s: '申报产生的应缴税款在线缴纳' },
+        { n: '预缴税款缴纳', s: '预缴税款申报缴纳业务办理' },
+        { n: '滞纳金缴纳', s: '逾期申报产生的滞纳金缴纳' },
+        { n: '缴款凭证查询', s: '已缴税费的电子缴款凭证查询打印' }
+      ],
+      tips: '缴款成功后可在线获取电子缴款凭证，电子凭证与纸质凭证具有同等法律效力。'
+    },
+    cert: {
+      name: '证明开具', icon: '证', color: 'green',
+      desc: '各类涉税证明在线开具，即办即取',
+      items: [
+        { n: '纳税证明开具', s: '近三年纳税情况证明在线开具' },
+        { n: '完税证明开具', s: '税收完税证明（文书式 / 表格式）' },
+        { n: '无欠税证明', s: '用于招投标、贷款等场景的无欠税证明' },
+        { n: '个人所得税纳税记录', s: '个人所得税纳税记录在线查询开具' }
+      ],
+      tips: '线上开具的涉税证明均附电子签章，可通过扫描证明上的二维码验证真伪。'
+    },
+    social: {
+      name: '社保缴费', icon: '保', color: 'purple',
+      desc: '灵活就业、城乡居民社保费申报与缴纳',
+      items: [
+        { n: '灵活就业人员社保费申报', s: '养老保险 / 医疗保险申报缴纳' },
+        { n: '城乡居民社保费缴纳', s: '城乡居民养老保险、医疗保险缴纳' },
+        { n: '社保费缴费证明开具', s: '缴费记录查询与缴费证明打印' },
+        { n: '社保费退费申请', s: '重复缴费等原因的退费申请' }
+      ],
+      tips: '缴费前请先核实参保信息与缴费基数，缴费成功后如需退费请携带相关材料到办税服务厅办理。'
+    },
+    appoint: {
+      name: '预约办税', icon: '约', color: 'teal',
+      desc: '在线预约办税服务厅，到厅免排队优先办理',
+      items: [],
+      tips: '请按预约时段携带本人身份证件到预约服务厅办理业务，无法按时到厅请提前取消预约。'
+    },
+    iit: {
+      name: '个人所得税', icon: '个', color: 'red',
+      desc: '综合所得年度汇算与专项附加扣除办理',
+      items: [
+        { n: '综合所得年度汇算', s: '年度汇算清缴，多退少补' },
+        { n: '专项附加扣除填报', s: '子女教育 / 赡养老人 / 房贷利息等七项' },
+        { n: '收入纳税明细查询', s: '工资薪金、劳务报酬等收入明细' },
+        { n: '任职受雇信息查询', s: '本人任职受雇单位信息查询' }
+      ],
+      tips: '年度汇算期为每年3月1日至6月30日，请如实填报专项附加扣除信息，虚假填报将影响个人纳税信用。'
+    },
+    company: {
+      name: '企业开办', icon: '企', color: 'blue',
+      desc: '新办纳税人套餐式服务，开办事项一次办结',
+      items: [
+        { n: '新办纳税人套餐', s: '税务登记信息确认等一站式办理' },
+        { n: '财务会计制度备案', s: '财务会计制度及核算软件备案报告' },
+        { n: '存款账户账号报告', s: '用于税库银缴款的账户报告' },
+        { n: '签订三方协议', s: '委托扣缴税款协议在线签订' }
+      ],
+      tips: '新办纳税人完成套餐办理后，可同步完成票种核定、税控设备发行，实现开办即可领票开票。'
+    },
+    export: {
+      name: '出口退税', icon: '出', color: 'green',
+      desc: '出口退税申报、进度查询与免税核销',
+      items: [
+        { n: '出口退税申报', s: '出口货物劳务退（免）税申报' },
+        { n: '退税进度查询', s: '申报数据审核状态实时查询' },
+        { n: '免税核销办理', s: '出口免税业务的核销办理' },
+        { n: '出口退（免）税备案', s: '出口企业退免税备案变更' }
+      ],
+      tips: '出口退税申报需先完成出口退（免）税备案，申报数据经审核通过后税款将退至指定银行账户。'
+    },
+    credit: {
+      name: '纳税信用', icon: '信', color: 'orange',
+      desc: '纳税信用评价结果查询与信用修复',
+      items: [
+        { n: '纳税信用评价结果查询', s: 'A / B / M / C / D 级评价结果' },
+        { n: '纳税信用修复申请', s: '符合条件失信行为的信用修复' },
+        { n: 'A级纳税人名单', s: '年度A级纳税人名单公示查询' },
+        { n: '重大税收违法案件查询', s: '税收违法"黑名单"信息查询' }
+      ],
+      tips: '纳税信用级别越高，可享受的激励措施越多：发票领用便利、出口退税优先、融资贷款支持等。'
+    },
+    halls: {
+      name: '办税服务厅', icon: '厅', color: 'red',
+      desc: '就近办税服务厅导航与预约',
+      items: [],
+      tips: '前往办税服务厅请携带本人身份证件，高峰时段建议先通过「预约办税」预约后再前往。'
+    },
+    progress: {
+      name: '办税进度', icon: '进', color: 'blue',
+      desc: '已办理涉税事项的进度与结果查询',
+      items: [
+        { n: '增值税申报（2026年9月所属期）', s: '提交于 2026-10-08', badge: '已完成' },
+        { n: '增值税申报（2026年10月所属期）', s: '待于 10-23 前提交申报', badge: '待办理' },
+        { n: '发票票种核定申请', s: '提交于 2026-10-02，人工审核中', badge: '办理中' },
+        { n: '无欠税证明开具', s: '开具成功，可在证明开具中下载', badge: '已完成' },
+        { n: '出口退税申报（第二批）', s: '提交于 2026-09-28，审核中', badge: '办理中' },
+        { n: '财务报表报送（三季度）', s: '报送成功', badge: '已完成' }
+      ],
+      tips: '办理中的事项请耐心等待审核，审核结果将通过消息中心推送通知您。'
+    },
+    services: {
+      name: '全部常用服务', icon: '服', color: 'gray',
+      desc: '高频办税业务快速入口',
+      items: [
+        { n: '我要申报', s: '各税种纳税申报办理', biz: 'declare' },
+        { n: '发票业务', s: '发票代开 / 领用 / 查验', biz: 'invoice' },
+        { n: '税费缴纳', s: '税款、滞纳金在线缴纳', biz: 'pay' },
+        { n: '证明开具', s: '完税证明、无欠税证明等', biz: 'cert' },
+        { n: '社保缴费', s: '灵活就业 / 城乡居民社保费', biz: 'social' },
+        { n: '预约办税', s: '办税服务厅在线预约', biz: 'appoint' },
+        { n: '个人所得税', s: '年度汇算 / 专项附加扣除', biz: 'iit' },
+        { n: '企业开办', s: '新办纳税人套餐式服务', biz: 'company' },
+        { n: '出口退税', s: '退税申报与进度查询', biz: 'export' },
+        { n: '纳税信用', s: '信用评价与修复', biz: 'credit' }
+      ],
+      tips: '更多办税业务可通过底部「信息」模块查阅办税指南，或拨打 12366 纳税服务热线咨询。'
+    }
+  };
+
+  /* 当前业务页 key */
+  let currentBiz = '';
+  let bizCollapsed = true;   // 业务办理列表默认收起，只展示前 3 项
+
+  /* 服务厅数据（含详细地址，用于导航） */
+  const HALLS = [
+    {
+      name: '第一税务分局办税服务厅',
+      addr: '北京市西城区月坛北街 15 号',
+      detail: '国家税务总局××市税务局第一税务分局综合服务大厅（1号楼一层 1-8 号窗口，进门左转）',
+      time: '工作日 08:30-17:00',
+      dist: '距离 1.2km · 营业中 08:30-17:00'
+    },
+    {
+      name: '第二税务分局办税服务厅',
+      addr: '北京市朝阳区建国路 88 号',
+      detail: '国家税务总局××市税务局第二税务分局办税服务厅（2号楼二层 201-212 号窗口，电梯直达）',
+      time: '工作日 09:00-17:30',
+      dist: '距离 3.6km · 营业中 09:00-17:30'
+    }
+  ];
+
+  function openBiz(key) {
+    const b = BIZ[key];
+    if (!b) { toast('业务开发中'); return; }
+    currentBiz = key;
+    bizCollapsed = true;
+
+    $('#bizTopTitle').textContent = b.name;
+    $('#bizHeroIcon').textContent = b.icon;
+    $('#bizHeroName').textContent = b.name;
+    $('#bizHeroDesc').textContent = b.desc;
+    $('#bizTips').textContent = b.tips;
+
+    /* 办税服务厅页：hero 文字后显示「导航」按钮 */
+    $('#bizHeroNav').classList.toggle('hidden', key !== 'halls');
+
+    renderBizList();
+
+    /* 预约表单仅预约办税显示 */
+    $('#bizAppointCard').classList.toggle('hidden', key !== 'appoint');
+    if (key === 'appoint') {
+      var d = $('#appointDate');
+      if (d && !d.value) {
+        var t = new Date(); t.setDate(t.getDate() + 1);
+        var p = function (v) { return String(v).padStart(2, '0'); };
+        d.value = t.getFullYear() + '-' + p(t.getMonth() + 1) + '-' + p(t.getDate());
+      }
+    }
+
+    /* 隐藏预约卡片时隐藏其所在位置 */
+    goPage('biz');
+  }
+
+  /* 渲染"业务办理"列表：默认收起前 3 项，点「全部」展开全部 */
+  function renderBizList() {
+    var b = BIZ[currentBiz];
+    var box = $('#bizItems');
+    var more = $('#bizMore');
+
+    /* 办税服务厅：渲染服务厅导航卡片 */
+    if (currentBiz === 'halls') {
+      more.style.display = 'none';
+      box.innerHTML = HALLS.map(function (h, idx) {
+        return `
+          <div class="hall-item hall-item-nav">
+            <div class="hall-info">
+              <div class="hall-name">${h.name}</div>
+              <div class="hall-addr">地址：${h.addr}</div>
+              <div class="hall-addr">详细地址：${h.detail}</div>
+              <div class="hall-tag">${h.dist}</div>
+            </div>
+            <div class="hall-nav-btn" data-act="open-nav" data-hall="${idx}">导航</div>
+          </div>`;
+      }).join('');
+      return;
+    }
+
+    if (!b.items.length) {
+      more.style.display = 'none';
+      box.innerHTML = '<div class="bill-empty">请在下方填写信息办理</div>';
+      return;
+    }
+
+    var showAll = !bizCollapsed || b.items.length <= 3;
+    more.style.display = b.items.length > 3 ? '' : 'none';
+    more.textContent = showAll ? '收起 ‹' : '全部 ›';
+    var list = showAll ? b.items : b.items.slice(0, 3);
+
+    box.innerHTML = list.map(function (it) {
+      var realIdx = b.items.indexOf(it);
+      var badge = '';
+      if (it.badge) {
+        var cls = it.badge === '已完成' ? 'b-done' : (it.badge === '办理中' ? 'b-doing' : 'b-wait');
+        badge = '<span class="badge ' + cls + '">' + it.badge + '</span>';
+      }
+      var arrow = it.biz
+        ? '<div class="li-arrow" data-act="open-biz" data-biz="' + it.biz + '" style="cursor:pointer">›</div>'
+        : '<div class="li-arrow">›</div>';
+      return `
+        <div class="list-item" data-act="biz-item" data-idx="${realIdx}">
+          <div class="li-body">
+            <div class="li-title">${it.n}</div>
+            <div class="li-sub">${it.s}</div>
+          </div>
+          ${badge}
+          ${arrow}
+        </div>`;
+    }).join('');
+  }
+
+  /* 打开服务厅导航界面 */
+  function openNav(idx) {
+    var h = HALLS[idx];
+    if (!h) return;
+    $('#navTitle').textContent = h.name;
+    $('#navAddr').textContent = h.addr;
+    $('#navDetail').textContent = h.detail;
+    $('#navTime').textContent = h.time;
+    $('#navOverlay').classList.add('show');
+  }
+
+  function renderBizItem(idx) {
+    var b = BIZ[currentBiz];
+    if (!b || !b.items[idx]) return;
+    var it = b.items[idx];
+    /* 全部常用服务里的条目：点击直接进入对应业务页面 */
+    if (it.biz) { openBiz(it.biz); return; }
+    alertBox('业务详情',
+      '<div style="text-align:left">' + it.n +
+      '<div style="font-size:12px;color:#8f959e;margin:6px 0 10px">' + b.name + '</div>' +
+      '<div style="line-height:1.8">' + it.s + '。<br>该业务支持全程网上办理，提交后将由系统自动受理' +
+      (it.badge ? '，当前状态：<b style="color:#d98200">' + it.badge + '</b>' : '') + '。</div></div>');
+  }
+
+  /* ---------------- 我的业务记录（申报/缴款/发票） ---------------- */
+  const REC = {
+    declare: {
+      name: '申报记录', icon: '报', li: 'li-red',
+      desc: '查看历史申报数据',
+      records: [
+        { tag: '增', n: '增值税及附加税费申报（一般纳税人）', s: '所属期 2026-09 · 提交于 2026-10-08 09:12', badge: '申报成功',
+          detail: [['所属期', '2026-09'], ['提交时间', '2026-10-08 09:12'], ['征收项目', '增值税及附加税费'], ['申报方式', '网上申报'], ['税款金额', '3,200.00 元（已缴款）'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '企', n: '企业所得税预缴申报', s: '所属期 2026-09 · 提交于 2026-10-09 14:36', badge: '申报成功',
+          detail: [['所属期', '2026-09'], ['提交时间', '2026-10-09 14:36'], ['征收项目', '企业所得税'], ['申报方式', '网上申报'], ['预缴税款', '8,500.00 元（已缴款）'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '财', n: '财务报表报送（三季度）', s: '报送于 2026-10-10 10:05 · 系统已受理', badge: '已受理',
+          detail: [['报送期间', '2026 年第三季度'], ['报送时间', '2026-10-10 10:05'], ['报表类型', '资产负债表 / 利润表 / 现金流量表'], ['受理状态', '系统已自动受理'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '个', n: '个人所得税经营所得申报', s: '所属期 2026-08 · 提交于 2026-09-15 16:40', badge: '申报成功',
+          detail: [['所属期', '2026-08'], ['提交时间', '2026-09-15 16:40'], ['征收项目', '个人所得税（经营所得）'], ['征收方式', '查账征收'], ['应纳税额', '0.00 元（无税申报）'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '增', n: '增值税及附加税费申报（一般纳税人）', s: '所属期 2026-10 · 申报期限 10-23', badge: '待申报',
+          detail: [['所属期', '2026-10'], ['申报期限', '2026-10-23'], ['征收项目', '增值税及附加税费'], ['办理状态', '待申报，请按期完成申报'], ['温馨提示', '逾期申报将按日加收万分之五滞纳金']] }
+      ],
+      tips: '申报记录支持查询近 24 个月的申报数据；如需更早记录或办理更正申报，请前往办税服务厅办理。'
+    },
+    payrec: {
+      name: '缴款记录', icon: '缴', li: 'li-blue',
+      desc: '税费缴纳明细查询',
+      records: [
+        { tag: '增', n: '增值税税款缴纳', s: '2026-10-08 09:15 · 缴款凭证号 03210********8', amount: '-3,200.00', badge: '缴款成功',
+          detail: [['缴款金额', '3,200.00 元'], ['缴款时间', '2026-10-08 09:15'], ['缴款渠道', '三方协议缴款（实时扣款）'], ['缴款凭证号', '03210********8'], ['对应申报', '增值税及附加税费申报（2026-09）'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '企', n: '企业所得税预缴税款', s: '2026-10-09 14:40 · 缴款凭证号 03211********3', amount: '-8,500.00', badge: '缴款成功',
+          detail: [['缴款金额', '8,500.00 元'], ['缴款时间', '2026-10-09 14:40'], ['缴款渠道', '银行端查询缴税'], ['缴款凭证号', '03211********3'], ['对应申报', '企业所得税预缴申报（2026-09）'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '印', n: '印花税缴纳（购销合同）', s: '2026-09-28 11:22 · 缴款凭证号 03187********6', amount: '-260.50', badge: '缴款成功',
+          detail: [['缴款金额', '260.50 元'], ['缴款时间', '2026-09-28 11:22'], ['税目', '印花税 · 买卖合同'], ['计税依据', '购销合同金额 868,333.33 元'], ['缴款凭证号', '03187********6'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '滞', n: '滞纳金缴纳', s: '2026-09-20 15:47 · 逾期 3 天，按日万分之五加收', amount: '-48.00', badge: '缴款成功',
+          detail: [['缴款金额', '48.00 元'], ['缴款时间', '2026-09-20 15:47'], ['滞纳原因', '税款逾期 3 天缴纳'], ['计算标准', '按日加收应纳税款万分之五'], ['对应税款', '增值税 3,200.00 元'], ['税务机关', '××市税务局第一税务分局']] },
+        { tag: '社', n: '灵活就业人员社保费', s: '2026-09-05 08:30 · 银行端查询缴税', amount: '-1,180.00', badge: '缴款成功',
+          detail: [['缴费金额', '1,180.00 元'], ['缴费时间', '2026-09-05 08:30'], ['费种', '基本养老保险 + 基本医疗保险'], ['费款所属期', '2026-09'], ['缴费渠道', '银行端查询缴税'], ['经办机构', '××市税务局社保费科']] }
+      ],
+      tips: '缴款成功后可在线获取电子缴款凭证，电子凭证与纸质凭证具有同等法律效力。'
+    },
+    invrec: {
+      name: '发票记录', icon: '票', li: 'li-orange',
+      desc: '开票与受票信息',
+      records: [
+        { tag: '开', n: '电子发票（普通发票）', s: '开票日期 2026-10-09 · 购方：××科技有限公司', amount: '+2,260.00', badge: '开票成功',
+          detail: [['发票类型', '电子发票（普通发票）'], ['发票号码', '08810001********41'], ['开票日期', '2026-10-09'], ['购买方', '××科技有限公司'], ['项目名称', '*信息技术服务*软件开发服务费'], ['价税合计', '2,260.00 元'], ['查验提示', '可在「发票业务 → 发票查验」核验真伪']] },
+        { tag: '专', n: '增值税专用发票', s: '开票日期 2026-10-06 · 购方：××贸易有限公司', amount: '+15,800.00', badge: '开票成功',
+          detail: [['发票类型', '增值税专用发票'], ['发票号码', '08500002********66'], ['开票日期', '2026-10-06'], ['购买方', '××贸易有限公司（纳税人识别号 9111********）'], ['项目名称', '*货物*办公设备一批'], ['税率', '13%'], ['价税合计', '15,800.00 元']] },
+        { tag: '受', n: '受票查验（出租车发票）', s: '查验日期 2026-09-30 · 发票号码 0881********52', badge: '已查验',
+          detail: [['发票类型', '出租车客运发票'], ['发票号码', '0881********52'], ['开票方', '××市出租汽车有限公司'], ['开票金额', '36.00 元'], ['查验日期', '2026-09-30'], ['查验结果', '发票信息与税务机关登记信息一致']] },
+        { tag: '代', n: '代开增值税发票申请', s: '申请日期 2026-09-22 · 税务机关代开，人工审核中', amount: '+5,400.00', badge: '审核中',
+          detail: [['申请类型', '自然人代开增值税发票'], ['申请日期', '2026-09-22'], ['价税合计', '5,400.00 元'], ['项目名称', '*建筑服务*维修劳务费'], ['代开机关', '××市税务局第一税务分局'], ['办理状态', '人工审核中，审核通过后即可取票']] },
+        { tag: '开', n: '电子发票（普通发票）', s: '开票日期 2026-09-18 · 购方：个人（消费者）', amount: '+358.00', badge: '开票成功',
+          detail: [['发票类型', '电子发票（普通发票）'], ['发票号码', '08810003********17'], ['开票日期', '2026-09-18'], ['购买方', '个人（消费者）'], ['项目名称', '*餐饮服务*餐费'], ['价税合计', '358.00 元'], ['查验提示', '可在「发票业务 → 发票查验」核验真伪']] }
+      ],
+      tips: '发票记录包含本人开具与取得的发票信息，可通过「发票业务 → 发票查验」输入发票代码号码核验真伪。'
+    }
+  };
+
+  function recBadgeCls(t) {
+    if (/成功|已/.test(t)) return 'b-done';
+    if (/中/.test(t)) return 'b-doing';
+    return 'b-wait';
+  }
+
+  let currentRec = 'declare';
+
+  function openRec(key) {
+    const r = REC[key];
+    if (!r) { toast('功能开发中'); return; }
+    currentRec = key;
+    $('#recTopTitle').textContent = r.name;
+    $('#recHeroIcon').textContent = r.icon;
+    $('#recHeroName').textContent = r.name;
+    $('#recHeroDesc').textContent = r.desc;
+    $('#recTips').textContent = r.tips;
+    renderRec();
+    goPage('rec');
+  }
+
+  function renderRec() {
+    const r = REC[currentRec];
+    const box = $('#recItems');
+    $('#recCount').textContent = '共 ' + r.records.length + ' 条';
+    box.innerHTML = r.records.map((it, idx) => `
+      <div class="list-item" data-act="rec-item" data-idx="${idx}">
+        <div class="li-icon ${r.li}">${it.tag}</div>
+        <div class="li-body">
+          <div class="li-title">${it.n}</div>
+          <div class="li-sub">${it.s}</div>
+        </div>
+        ${it.amount ? `<div class="rec-amount">${it.amount}</div>` : ''}
+        <span class="badge ${recBadgeCls(it.badge)}">${it.badge}</span>
+        <div class="li-arrow">›</div>
+      </div>`).join('');
+  }
+
+  /* 记录详情弹窗 */
+  function renderRecItem(idx) {
+    const r = REC[currentRec];
+    const it = r.records[idx];
+    if (!it) return;
+    const rows = (it.detail || []).map(kv =>
+      `<div class="dv-row"><span class="dv-k">${kv[0]}</span><span class="dv-v">${kv[1]}</span></div>`
+    ).join('');
+    alertBox(r.name + '详情',
+      '<div style="text-align:left">' +
+      `<div class="dv-title">${it.n}</div>` +
+      `<div class="dv-badge-row"><span class="badge ${recBadgeCls(it.badge)}">${it.badge}</span>` +
+      (it.amount ? `<span class="rec-amount">${it.amount}</span>` : '') + '</div>' +
+      rows +
+      '<div class="dv-note">本页信息为演示数据，仅用于功能展示。</div>' +
+      '</div>');
+  }
+
+  /* ---------------- 选项 chip 单选 ---------------- */
+  function bindChipRow(rowId) {
+    $('#' + rowId).addEventListener('click', function (e) {
+      var chip = e.target.closest('.chip');
+      if (!chip) return;
+      $$('#' + rowId + ' .chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+    });
+  }
+  function chipValue(rowId) {
+    var a = $('#' + rowId + ' .chip.active');
+    return a ? a.dataset.v : '';
+  }
+
+  function renderInfo(tab) {
+    const list = INFO.filter(i => i.tab === tab);
+    const box = $('#infoList');
+    if (!list.length) {
+      box.innerHTML = '<div class="bill-empty">暂无内容</div>';
+      return;
+    }
+    box.innerHTML = list.map(i => {
+      const parts = i.date.split('-');
+      return `
+        <div class="info-item" data-info="${i.title}">
+          <div class="info-date-box">
+            <div class="info-day">${parts[2]}</div>
+            <div class="info-ym">${parts[0]}.${parts[1]}</div>
+          </div>
+          <div class="info-body">
+            <div class="info-title">${i.title}</div>
+            <div class="info-summary">${i.summary}</div>
+            <div class="info-meta">
+              <span class="info-tagx">${INFO_TAG[i.tab]}</span>
+              <span>${i.src}</span>
+              <span style="margin-left:auto">阅读 ${i.read}</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  /* =========================================================
+     事件绑定
+     ========================================================= */
+  function bindEvents() {
+
+    /* ---- 底部导航 ---- */
+    $$('.tab-item').forEach(t => {
+      t.addEventListener('click', () => goPage(t.dataset.page));
+    });
+
+    /* ---- 头部快捷 ---- */
+    $$('.header-link').forEach(a => {
+      a.addEventListener('click', () => {
+        if (a.id === 'headerMine' && !currentUser) {
+          goPage('mine');
+          openOverlay('loginOverlay');
+          return;
+        }
+        goPage(a.dataset.page);
+      });
+    });
+
+    /* ---- 消息 / 信息 选项卡 ---- */
+    $$('#msgTabs .msg-tab').forEach(t => {
+      t.addEventListener('click', () => {
+        $$('#msgTabs .msg-tab').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        renderMessages(t.dataset.tab);
+      });
+    });
+    $$('#infoTabs .info-tab').forEach(t => {
+      t.addEventListener('click', () => {
+        $$('#infoTabs .info-tab').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        renderInfo(t.dataset.tab);
+      });
+    });
+
+    /* ---- 委托：data-act / data-msg / data-info ---- */
+    document.addEventListener('click', e => {
+      /* 消息项 */
+      const msg = e.target.closest('[data-msg]:not([data-act])');
+      if (msg) {
+        const title = msg.getAttribute('data-msg');
+        const m = MESSAGES.find(x => x.title === title);
+        if (m) {
+          m.unread = false;
+          msg.classList.add('read');
+          const foot = msg.querySelector('.msg-foot span:nth-child(2)');
+          const dot = msg.querySelector('.dot-unread');
+          if (foot) foot.textContent = '已读';
+          if (dot) dot.style.background = '#cfd4dc';
+          updateMsgBadge();
+          alertBox('消息详情', '<div style="text-align:left">' + m.title +
+            '<div style="font-size:12px;color:#8f959e;margin:6px 0 10px">' +
+            MSG_TAB_NAME[m.type] + ' · ' + m.date + '</div>' + m.text + '</div>');
+        }
+        return;
+      }
+
+      /* 信息项 */
+      const info = e.target.closest('[data-info]');
+      if (info) {
+        const title = info.getAttribute('data-info');
+        const it = INFO.find(x => x.title === title);
+        if (it) {
+          alertBox('信息公开详情', '<div style="text-align:left">' + it.title +
+            '<div style="font-size:12px;color:#8f959e;margin:6px 0 10px">' +
+            INFO_TAG[it.tab] + ' · ' + it.date + ' · ' + it.src + '</div>' +
+            it.summary + '</div>');
+        }
+        return;
+      }
+
+      /* 动作 */
+      const el = e.target.closest('[data-act]');
+      if (!el) return;
+      const act = el.getAttribute('data-act');
+      const msgText = el.getAttribute('data-msg');
+
+      switch (act) {
+        /* -- 提示类 -- */
+        case 'toast':
+          if (msgText) toast(msgText);
+          break;
+
+        /* -- 页面跳转 -- */
+        case 'page':
+          goPage(el.dataset.page);
+          break;
+
+        /* -- 打开办税业务页面 -- */
+        case 'open-biz': {
+          var key = el.dataset.biz;
+          if (BIZ[key] && BIZ[key].needLogin && !currentUser) {
+            goPage('mine');
+            openOverlay('loginOverlay');
+            return;
+          }
+          openBiz(key);
+          break;
+        }
+
+        case 'goto-policy':
+          goPage('info');
+          /* 自动切到政策公告标签 */
+          $$('#infoTabs .info-tab').forEach(function (t) {
+            t.classList.toggle('active', t.dataset.tab === 'policy');
+          });
+          renderInfo('policy');
+          break;
+
+        /* -- 消息中心「全部已读」：真正标记全部已读并刷新角标 -- */
+        case 'read-all': {
+          MESSAGES.forEach(m => { m.unread = false; });
+          const curTab = $('#msgTabs .msg-tab.active');
+          renderMessages(curTab ? curTab.dataset.tab : 'all');
+          updateMsgBadge();
+          toast('已全部标记为已读');
+          break;
+        }
+
+        /* -- 办税提醒「更多」→ 消息模块的税务提醒 -- */
+        case 'goto-remind':
+          goPage('message');
+          $$('#msgTabs .msg-tab').forEach(function (t) {
+            t.classList.toggle('active', t.dataset.tab === 'tax');
+          });
+          renderMessages('tax');
+          break;
+
+        /* -- 业务办理「全部」展开 / 「收起」收起 -- */
+        case 'biz-more':
+          bizCollapsed = !bizCollapsed;
+          renderBizList();
+          if (!bizCollapsed) toast('已展开全部 ' + BIZ[currentBiz].items.length + ' 项业务');
+          break;
+
+        /* -- 服务厅「导航」按钮 → 导航界面 -- */
+        case 'open-nav':
+          openNav(Number(el.dataset.hall));
+          break;
+
+        case 'close-nav':
+          closeOverlay('navOverlay');
+          break;
+
+        /* -- 导航界面「使用」按钮 → 跳转高德地图官网 -- */
+        case 'open-amap':
+          try {
+            var w = window.open('https://www.amap.com', '_blank');
+            if (!w) { location.href = 'https://www.amap.com'; }
+          } catch (err) {
+            location.href = 'https://www.amap.com';
+          }
+          closeOverlay('navOverlay');
+          break;
+
+        /* -- 业务页返回 -- */
+        case 'biz-back':
+          goPage('home');
+          break;
+
+        /* -- 业务列表项详情 -- */
+        case 'biz-item':
+          renderBizItem(Number(el.dataset.idx));
+          break;
+
+        /* -- 我的业务：申报记录 / 缴款记录 / 发票记录 -- */
+        case 'open-rec':
+          openRec(el.dataset.rec);
+          break;
+
+        case 'rec-back':
+          goPage('mine');
+          break;
+
+        /* -- 实名认证 -- */
+        case 'open-cert':
+          closeOverlay('accountOverlay');
+          renderCertBadge();
+          goPage('cert');
+          break;
+
+        case 'cert-back':
+          goPage('mine');
+          break;
+
+        case 'do-cert': {
+          var certName = ($('#certName').value || '').trim();
+          var certId = ($('#certId').value || '').trim().toUpperCase();
+          if (!certName) { toast('请输入真实姓名'); $('#certName').focus(); return; }
+          if (!certId) { toast('请输入身份证号'); $('#certId').focus(); return; }
+
+          /* 示例数据不允许用来实名 */
+          if (certId === CERT_DEMO_ID) {
+            alertBox('实名认证失败', '示例实名认证无法用于实名认证', '确定');
+            return;
+          }
+          /* 身份证号必须刚好 18 位：少于 18 位或超过 18 位都认证失败 */
+          if (certId.length < 18) {
+            alertBox('实名认证失败', '身份证号不能少于 18 位（当前 ' + certId.length + ' 位），只能刚好 18 位才能实名认证成功', '确定');
+            return;
+          }
+          if (certId.length > 18) {
+            alertBox('实名认证失败', '身份证号不能超过 18 位（当前 ' + certId.length + ' 位），只能刚好 18 位才能实名认证成功', '确定');
+            return;
+          }
+
+          certInfo = { name: certName, id: certId, time: nowTime() };
+          saveCert();
+          renderCertBadge();
+          $('#certName').value = '';
+          $('#certId').value = '';
+          alertBox('实名认证成功',
+            '<div style="text-align:left">' +
+            '您已完成实名认证：<b>' + certInfo.name.charAt(0) + '*'.repeat(Math.max(certInfo.name.length - 1, 1)) + '</b><br>' +
+            '<span style="font-size:12px;color:#8f959e">身份证号：' + certId.slice(0, 4) + '**********' + certId.slice(-4) + '</span><br><br>' +
+            '<span style="font-size:12px;color:#17a56b">已解锁全部办税功能</span></div>');
+          break;
+        }
+
+        /* -- 修改密码 -- */
+        case 'open-pwd': {
+          closeOverlay('accountOverlay');
+          $('#pwdAccount').textContent = currentUser ? currentUser.name : '—';
+          $('#pwdOld').value = '';
+          $('#pwdNew').value = '';
+          openOverlay('pwdOverlay');
+          break;
+        }
+        case 'close-pwd': closeOverlay('pwdOverlay'); break;
+
+        case 'do-changepwd': {
+          const oldPwd = ($('#pwdOld').value || '').trim();
+          const newPwd = ($('#pwdNew').value || '').trim();
+          if (!oldPwd) { toast('请输入原密码'); $('#pwdOld').focus(); return; }
+          if (!newPwd) { toast('请输入新密码'); $('#pwdNew').focus(); return; }
+          if (newPwd === oldPwd) { toast('新密码不能与原密码相同'); $('#pwdNew').focus(); return; }
+
+          /* 原密码校验：临时登录保存过密码则必须一致；从未设置过密码则任意通过（首次设置） */
+          const saved = safeGet(localStorage, K_PWD);
+          if (saved && saved !== oldPwd) { toast('原密码不正确'); $('#pwdOld').focus(); return; }
+
+          safeSet(localStorage, K_PWD, newPwd);
+          $('#pwdOld').value = '';
+          $('#pwdNew').value = '';
+          closeOverlay('pwdOverlay');
+          alertBox('修改成功',
+            '<div style="text-align:left">登录密码已修改成功。<br><br>' +
+            '<span style="font-size:12px;color:#8f959e">请牢记新密码，下次登录时请使用新密码。</span></div>');
+          break;
+        }
+
+        /* -- 账号注销 -- */
+        case 'open-del': {
+          closeOverlay('accountOverlay');
+          $('#delAvatarText').textContent = currentUser ? currentUser.avatarText : '临';
+          $('#delName').textContent = currentUser ? currentUser.name : '—';
+          $('#delId').textContent = '账号 ID：' + (currentUser ? (currentUser.account || '—') : '—');
+          $('#delAgree').checked = false;
+          openOverlay('delOverlay');
+          break;
+        }
+        case 'close-del': closeOverlay('delOverlay'); break;
+
+        case 'do-del': {
+          if (!$('#delAgree').checked) { toast('请先勾选同意注销当前账号'); return; }
+          /* 清空本机所有办税数据：登录、余额、明细、资料、实名认证、密码 */
+          clearUser();
+          safeDel(localStorage, K_BALANCE);
+          safeDel(localStorage, K_BILL);
+          safeDel(localStorage, K_PROFILE);
+          safeDel(localStorage, K_CERT);
+          safeDel(localStorage, K_PWD);
+          balance = 0;
+          bills = [];
+          certInfo = null;
+          saveBalance();
+          saveBills();
+          closeOverlay('delOverlay');
+          renderMine();
+          goPage('mine');
+          alertBox('账号已注销',
+            '<div style="text-align:left">当前账号已注销，本机所有办税数据已清空。<br><br>' +
+            '<span style="font-size:12px;color:#8f959e">如需继续办税，请重新登录。</span></div>');
+          break;
+        }
+
+        /* -- 我的业务记录条目详情 -- */
+        case 'rec-item':
+          renderRecItem(Number(el.dataset.idx));
+          break;
+
+        /* -- 预约提交 -- */
+        case 'do-appoint': {
+          var hall = chipValue('appointHall');
+          var date = $('#appointDate').value;
+          var slot = chipValue('appointTime');
+          var abiz = chipValue('appointBiz');
+          if (!date) { toast('请选择预约日期'); $('#appointDate').focus(); return; }
+          var no = 'YY-' + String(Math.floor(1000 + Math.random() * 9000));
+          alertBox('预约成功',
+            '您已成功预约办税服务。<br><br>' +
+            '<span style="color:#646a73">服务厅：' + hall + '</span><br>' +
+            '<span style="color:#646a73">时间：' + date + ' ' + slot + '</span><br>' +
+            '<span style="color:#646a73">业务：' + abiz + '</span><br>' +
+            '<span style="color:#646a73">预约号：</span><b style="font-size:15px">' + no + '</b><br><br>' +
+            '<span style="font-size:11px;color:#8f959e">请按预约时段携带本人身份证到厅取号办理。</span>');
+          break;
+        }
+
+        /* -- 登录流程 -- */
+        case 'open-login':
+          openOverlay('loginOverlay');
+          break;
+
+        case 'close-login':
+          closeOverlay('loginOverlay');
+          break;
+
+        case 'tab-temp':
+          closeOverlay('loginOverlay');
+          resetTempForm();
+          openOverlay('tempOverlay');
+          break;
+
+        case 'tab-real':
+          closeOverlay('loginOverlay');
+          resetRealForm();
+          openOverlay('realOverlay');
+          break;
+
+        case 'close-temp': closeOverlay('tempOverlay'); break;
+        case 'close-real': closeOverlay('realOverlay'); break;
+
+        /* -- 临时登录：账号 + 密码 即可登录 -- */
+        case 'do-temp-login': {
+          const acc = ($('#tempAccount').value || '').trim();
+          const pwd = ($('#tempPassword').value || '').trim();
+          if (!acc) { toast('请输入账号'); $('#tempAccount').focus(); return; }
+          if (!pwd) { toast('请输入密码'); $('#tempPassword').focus(); return; }
+          if (!$('#tempAgree').checked) { toast('请先阅读并同意用户服务协议'); return; }
+
+          loginAs({
+            mode: 'temp',
+            name: acc,                        // 用户名称 = 临时登录填写的账号
+            account: 'TEMP-' + acc.slice(0, 6).toUpperCase(),
+            avatarText: acc.slice(0, 1).toUpperCase()
+          }, true);
+
+          safeSet(localStorage, K_PWD, pwd);  // 记住本次登录密码，供"修改密码"校验原密码
+          closeOverlay('tempOverlay');
+          toast('临时登录成功');
+          setTimeout(() => goPage('mine'), 220);
+          break;
+        }
+
+        /* -- 发送验证码 -- */
+        case 'send-code': {
+          if (el.classList.contains('disabled')) return;
+          const phone = ($('#realPhone').value || '').trim();
+          if (!isPhone(phone)) {
+            const h = $('#codeHint');
+            h.textContent = '请输入正确的 11 位手机号';
+            h.classList.add('err');
+            toast('手机号格式不正确');
+            return;
+          }
+          smsCode = String(Math.floor(100000 + Math.random() * 900000));
+          lastCodePhone = phone;
+          showSms(smsCode, phone);
+          const h = $('#codeHint');
+          h.textContent = '验证码已发送至 ' + maskPhone(phone) + '，请查看短信';
+          h.classList.remove('err');
+          startCodeCountdown(el);
+          toast('验证码已发送');
+          break;
+        }
+
+        /* -- 立即登录：手机号 + 验证码 / 微信一键登录 -- */
+        case 'do-real-login': {
+          const phone = ($('#realPhone').value || '').trim();
+          const code = ($('#realCode').value || '').trim();
+          if (!isPhone(phone)) { toast('请输入正确的 11 位手机号'); return; }
+          if (!smsCode || lastCodePhone !== phone) { toast('请先获取短信验证码'); return; }
+          if (!/^\d{6}$/.test(code)) { toast('请输入 6 位验证码'); return; }
+          if (code !== smsCode) { toast('验证码不正确，请重新输入'); return; }
+          if (!$('#realAgree').checked) { toast('请先阅读并同意用户服务协议'); return; }
+
+          loginAs({
+            mode: 'real',
+            name: maskPhone(phone),          // 用户名 = 脱敏手机号，如 193****8535
+            account: maskPhone(phone),
+            avatarText: phone.slice(0, 1)
+          }, false);
+
+          smsCode = '';
+          closeOverlay('realOverlay');
+          toast('登录成功，已保持永久登录');
+          setTimeout(() => goPage('mine'), 220);
+          break;
+        }
+
+        /* -- 微信一键登录 → 先弹出授权确认弹窗 -- */
+        case 'open-wx-auth': {
+          /* 若已处于微信登录态，直接回到"我的" */
+          $('#wxNickname').value =
+            (currentUser && currentUser.mode === 'wx') ? currentUser.rawName || '' : '';
+          openOverlay('wxAuthOverlay');
+          setTimeout(() => { const i = $('#wxNickname'); if (i) i.focus(); }, 320);
+          break;
+        }
+
+        case 'close-wx-auth':
+          closeOverlay('wxAuthOverlay');
+          break;
+
+        /* -- 输入微信昵称，确认授权 → 登录成功 -- */
+        case 'do-wx-auth': {
+          const nick = ($('#wxNickname').value || '').trim();
+          if (!nick) { toast('请输入您的微信名称'); $('#wxNickname').focus(); return; }
+
+          loginAs({
+            mode: 'wx',
+            name: nick,                          // 用户名显示微信昵称
+            rawName: nick,
+            account: 'WX-' + (nick.length > 6 ? nick.slice(0, 6) : nick),
+            avatarText: nick.slice(0, 1) || '微'
+          }, false);
+
+          closeOverlay('wxAuthOverlay');
+          closeOverlay('realOverlay');
+          toast('授权成功，微信登录完成');
+          setTimeout(() => goPage('mine'), 220);
+          break;
+        }
+
+        /* -- 微信充值 -- */
+        case 'open-recharge':
+          renderBalance();
+          $('#walletInput').value = '';
+          $('#rechargeInput').value = '';
+          $('#payPassword').value = '';
+          openOverlay('rechargeOverlay');
+          break;
+
+        case 'close-recharge': closeOverlay('rechargeOverlay'); break;
+
+        case 'do-recharge': {
+          /* 先校验填写的微信钱包余额 */
+          const wbRaw = ($('#walletInput').value || '').trim();
+          if (wbRaw === '') {
+            toast('请输入微信钱包余额');
+            $('#walletInput').focus();
+            return;
+          }
+          const walletBalance = Number(wbRaw);
+          if (isNaN(walletBalance) || walletBalance < 0) {
+            toast('请输入正确的微信钱包余额');
+            $('#walletInput').focus();
+            return;
+          }
+
+          const custom = Number($('#rechargeInput').value);
+          if (isNaN(custom) || custom <= 0) { toast('请输入充值金额'); return; }
+
+          const amount = Number(custom.toFixed(2));
+
+          /* 单笔充值上限 100000 元（10 万） */
+          if (amount > 100000) {
+            toast('单笔充值金额最多 100000 元');
+            $('#rechargeInput').focus();
+            return;
+          }
+
+          /* 校验微信支付密码：必须为 6 位数字，不能多于也不能少于 6 位 */
+          const payPwd = ($('#payPassword').value || '').trim();
+          if (!payPwd) {
+            toast('请输入微信支付密码');
+            $('#payPassword').focus();
+            return;
+          }
+          if (!/^\d{6}$/.test(payPwd)) {
+            toast('支付密码必须为 6 位数字');
+            $('#payPassword').focus();
+            return;
+          }
+
+          /* 钱包余额不足 → 充值失败 */
+          if (walletBalance < amount) {
+            alertBox('充值失败',
+              '您的微信钱包余额不足，无法完成本次充值。<br><br>' +
+              '<span style="color:#646a73">钱包余额：' + money(walletBalance) + '</span><br>' +
+              '<span style="color:#646a73">充值金额：' + money(amount) + '</span>');
+            return;
+          }
+
+          /* 余额足够 → 充值成功（累加到账户余额） */
+          balance = Number((balance + amount).toFixed(2));
+          saveBalance();
+          addBill('微信充值', amount, 'in');
+
+          renderBalance();
+          const v = $('#balanceValue');
+          v.classList.remove('flash');
+          void v.offsetWidth;
+          v.classList.add('flash');
+
+          $('#rechargeInput').value = '';
+          $('#payPassword').value = '';
+          closeOverlay('rechargeOverlay');
+
+          alertBox('支付成功',
+            '微信支付密码验证通过，已通过微信钱包完成充值。<br><br>' +
+            '<span style="color:#646a73">钱包余额：' + money(walletBalance) + '</span><br>' +
+            '<span style="color:#646a73">本次充值：' + money(amount) + '</span><br>' +
+            '<span style="color:#646a73">账户余额：</span><b style="font-size:15px">' + money(balance) + '</b>');
+          break;
+        }
+
+        /* -- 账单明细 -- */
+        case 'open-bill':
+          renderBills();
+          openOverlay('billOverlay');
+          break;
+        case 'close-bill': closeOverlay('billOverlay'); break;
+
+        /* -- 联系方式 -- */
+        case 'open-contact':
+          renderProfile();
+          openOverlay('contactOverlay');
+          break;
+        case 'close-contact': closeOverlay('contactOverlay'); break;
+        case 'save-contact': {
+          const phone = ($('#contactPhone').value || '').trim();
+          if (phone && !isPhone(phone)) { toast('手机号格式不正确'); return; }
+          saveProfile({
+            phone: phone,
+            email: ($('#contactEmail').value || '').trim(),
+            hall: ($('#contactHall').value || '').trim(),
+            addr: ($('#contactAddr').value || '').trim()
+          });
+          closeOverlay('contactOverlay');
+          toast('联系方式已保存');
+          break;
+        }
+
+        /* -- 登录方式 -- */
+        case 'open-loginway':
+          renderMine();
+          openOverlay('loginwayOverlay');
+          break;
+        case 'close-loginway': closeOverlay('loginwayOverlay'); break;
+
+        /* -- 账号管理 -- */
+        case 'open-account':
+          renderMine();
+          openOverlay('accountOverlay');
+          break;
+        case 'close-account': closeOverlay('accountOverlay'); break;
+
+        /* -- 网站链接 -- */
+        case 'open-links': openOverlay('linksOverlay'); break;
+        case 'close-links': closeOverlay('linksOverlay'); break;
+
+        /* -- 退出登录 -- */
+        case 'logout': {
+          clearUser();
+          closeOverlay('accountOverlay');
+          renderMine();
+          goPage('mine');
+          toast('已退出登录');
+          break;
+        }
+
+        /* -- 通用提示框关闭 -- */
+        case 'close-alert': closeOverlay('alertOverlay'); break;
+      }
+    });
+
+    /* ---- 微信钱包余额：仅允许有效数字 ---- */
+    $('#walletInput').addEventListener('input', function () {
+      this.value = this.value.replace(/[^\d.]/g, '');
+    });
+
+    /* ---- 充值金额：仅允许数字与小数点，最多 100000 元 ---- */
+    $('#rechargeInput').addEventListener('input', function () {
+      this.value = this.value.replace(/[^\d.]/g, '');
+      /* 去掉多余小数点 */
+      const parts = this.value.split('.');
+      if (parts.length > 2) this.value = parts[0] + '.' + parts.slice(1).join('');
+      /* 超过 100000 自动收敛到 100000 */
+      const n = Number(this.value);
+      if (!isNaN(n) && n > 100000) this.value = '100000';
+    });
+
+    /* ---- 微信支付密码：只允许 6 位数字，不能多于也不能少于 6 位 ---- */
+    $('#payPassword').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').slice(0, 6);
+    });
+    $('#payPassword').addEventListener('keypress', function (e) {
+      /* 已达 6 位时阻止继续输入 */
+      if (this.value.length >= 6 && /\d/.test(e.key)) e.preventDefault();
+    });
+
+    /* ---- 实名认证：身份证号只允许数字和 X（不限制位数，提交时校验必须刚好 18 位） ---- */
+    $('#certId').addEventListener('input', function () {
+      this.value = this.value.replace(/[^\dXx]/g, '');
+    });
+    $('#certName').addEventListener('keydown', e => {
+      if (e.key === 'Enter') $('#certId').focus();
+    });
+    $('#certId').addEventListener('keydown', e => {
+      if (e.key === 'Enter') $('[data-act="do-cert"]').click();
+    });
+
+    /* ---- 预约表单选项单选 ---- */
+    bindChipRow('appointHall');
+    bindChipRow('appointTime');
+    bindChipRow('appointBiz');
+
+    /* ---- 遮罩点击关闭（点击空白处） ---- */
+    $$('.overlay').forEach(ov => {
+      ov.addEventListener('click', e => {
+        if (e.target === ov) {
+          /* 登录弹层是主入口，点空白不关闭；其余关闭 */
+          if (ov.id === 'loginOverlay' || ov.id === 'rechargeOverlay') return;
+          ov.classList.remove('show');
+        }
+      });
+    });
+
+    /* ---- 微信登录 / 账号密码表单：回车提交 ---- */
+    $('#tempPassword').addEventListener('keydown', e => {
+      if (e.key === 'Enter') $('[data-act="do-temp-login"]').click();
+    });
+    $('#realCode').addEventListener('keydown', e => {
+      if (e.key === 'Enter') $('[data-act="do-real-login"]').click();
+    });
+  }
+
+  /* ---------------- 登录表单辅助 ---------------- */
+  function resetTempForm() {
+    $('#tempAccount').value = '';
+    $('#tempPassword').value = '';
+    $('#tempAgree').checked = true;
+  }
+  function resetRealForm() {
+    $('#realPhone').value = '';
+    $('#realCode').value = '';
+    $('#codeHint').textContent = '';
+    $('#codeHint').classList.remove('err');
+    $('#realAgree').checked = true;
+    smsCode = '';
+    lastCodePhone = '';
+    const btn = $('#codeBtn');
+    btn.classList.remove('disabled');
+    btn.textContent = '获取验证码';
+    if (codeTimer) { clearInterval(codeTimer); codeTimer = null; }
+  }
+
+  /* ---------------- 登录统一入口 ---------------- */
+  function loginAs(user, isTemp) {
+    currentUser = user;                    // 临时登录仅存内存
+    if (isTemp) {
+      safeDel(localStorage, K_PERSIST);    // 清除可能存在的永久登录
+    } else {
+      savePermUser(user);                  // 写 localStorage → 永久登录
+    }
+    renderMine();
+  }
+
+  /* ---------------- 短信模拟 ---------------- */
+  function showSms(code, phone) {
+    const box = $('#smsToast');
+    $('#smsCode').textContent = code;
+    $('#smsTime').textContent = '刚刚';
+    box.classList.add('show');
+    clearTimeout(showSms._t);
+    showSms._t = setTimeout(() => box.classList.remove('show'), 5000);
+  }
+
+  function startCodeCountdown(btn) {
+    let n = 60;
+    btn.classList.add('disabled');
+    btn.textContent = n + 's 后重发';
+    if (codeTimer) clearInterval(codeTimer);
+    codeTimer = setInterval(() => {
+      n--;
+      if (n <= 0) {
+        clearInterval(codeTimer);
+        codeTimer = null;
+        btn.classList.remove('disabled');
+        btn.textContent = '重新获取';
+      } else {
+        btn.textContent = n + 's 后重发';
+      }
+    }, 1000);
+  }
+
+  /* ---------------- 初始化 ---------------- */
+  function init() {
+    /* 临时登录仅存内存：
+       - 刷新页面 / 关闭后重新进入 → 内存清空 → 自动退出登录
+       - 永久登录（立即登录/微信）写入 localStorage → 重新进入仍保持登录 */
+    restoreUser();
+    loadBalance();
+    loadBills();
+    loadProfile();
+    loadCert();
+
+    drawHomeChart();
+    renderMessages('all');
+    renderInfo('policy');
+    renderBills();
+    renderMine();
+
+    goPage('home');
+    bindEvents();
+
+    /* 首次进入默认展示首页 */
+    console.log('[办税服务厅] 初始化完成，当前登录状态：',
+      currentUser ? (currentUser.mode + ' / ' + currentUser.name) : '未登录');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
